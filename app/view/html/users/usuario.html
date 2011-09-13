@@ -1,0 +1,24 @@
+
+<div class="container users">
+	<p id="titulo"><neos:nome/></p>
+	
+	<div class="left">
+		<p class="fotoimg">
+			<img src="<neos:url/>img/users/<neos:foto/>.jpg" width="300" alt="foto de <neos:nome/>" />
+		</p>
+		<p><neos:pais/></p>	
+		<p><neos:estado/></p>
+		<p><neos:cidade/></p>
+	</div>
+		
+	<div class="rigth">
+		<div id="tsobre"><neos:sobre/></div>
+		
+		<label for="contatos">Contatos:</label>
+		<div id="contatos"><neos:contato/></div>
+		
+		<label for="tags">Tags:</label>
+		<div id="tags"><neos:tags/></div>
+	</div>
+	
+</div>

@@ -1,0 +1,29 @@
+<div class="container home">
+
+	<div class="home_inicial" id="hinicial">&nbsp;</div>
+		
+	<div class="home_final" id="hfinal">
+	
+		<div class="logotipo">&nbsp;</div>
+		
+		<div class="texto">    
+			<h2>NEOS é puro PHP!</h2>
+			<p>Não perca tempo lendo extensos manuais somente para aprender como o framework funciona! </p>
+			<p>Com o NEOS você precisa conhecer somente o PHP. O restante o NEOS faz para você!</p>
+			<p>Desenvolvido totalmente em português para facilitar ainda mais, o NEOS é a ferramenta ideal até mesmo <strong>para quem nunca usou um framework</strong> antes!</p>
+		</div>
+	
+	</div>   	
+	
+	<neos:_script href="audio-player.js" group="flash"/>
+	<div style="position:absolute; top:-9000px; text-align:center">
+	<object type="application/x-shockwave-flash" data="<neos:url/>flash/player.swf" id="audioplayer1" height="24" width="300">
+		<param name="movie" value="<neos:url/>flash/player.swf">
+		<param name="FlashVars" value="playerID=audioplayer1&soundFile=<neos:url/>flash/afinal.mp3&autostart=yes&titles=Você programa em PHP?">
+		<param name="quality" value="high">
+		<param name="menu" value="false">
+		<param name="wmode" value="transparent">
+	</object>
+	</div>
+
+</div>

@@ -1,0 +1,28 @@
+<div class="container screencast">
+	
+	<neos:modulo name="menu" baselink="screencast/index/" book="screencast" class="menu"/>
+		
+	<div class="conteudo"><h2 class="titulo-video"><neos:titulo/></h2>
+
+		<object width="640" height="480">
+				<param name="allowfullscreen" value="true" />
+				<param name="allowscriptaccess" value="always" />
+				<param name="movie" value="<neos:video/>" />
+				<param name="autoplay" value="true" />
+				<embed src="<neos:video/>"
+				type="application/x-shockwave-flash" allowfullscreen="true" allowscriptaccess="always" autoplay="true" width="640" height="480">
+				</embed>
+			</object>
+			
+		<div id="cconteudo">
+			<neos:conteudo/>
+		</div>
+		
+		<div class="comentarios">
+			<h2>Comentários</h2>						
+			<neos:modulo name="comentario" book="screencast" />						
+		</div>
+		
+	</div>	
+		
+</div>

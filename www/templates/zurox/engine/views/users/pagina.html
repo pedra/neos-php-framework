@@ -1,0 +1,36 @@
+<neos:_script href="ckeditor/ckeditor_basic.js" />
+<div class="users">
+	
+	<div class="left">
+		<p class="fotoimg"><img src="<neos:url/>img/users/<neos:foto/>.jpg" width="300" alt="foto de <neos:nome/>" /></p>
+		<form enctype="multipart/form-data" method="post" action="<neos:url/>user/trocaFoto">
+			<input type="hidden" name="MAX_FILE_SIZE" value="2000000" />
+			<p><input name="foto" type="file" /></p>
+			<p><input name="enviar" type="submit" value="Trocar a Foto" /></p>
+		</form>
+		<form method="post" action="<neos:url/>test.php/user/salvar/">
+		<p>O arquivo da foto deve ter o tamanho de 300px X 400px (ou outra resolução com relação 3 X 4). O tamanho máximo do arquivo não pode superar 1Mb.</p>
+		<hr />
+		<p class="coluna"><label for="pais">País:</label><input name="pais" type="text" value="<neos:pais/>" /></p>	
+		<p class="coluna"><label for="estado">Estado/Província:</label><input name="estado" type="text" value="<neos:estado/>" /></p>
+		<p class="coluna"><label for="cidade">Cidade:</label><input name="cidade" type="text" value="<neos:cidade/>" /></p>
+		<p class="coluna"><label for="senha">Nova Senha: </label><input name="senha" type="password" /></p>
+		<p>Se <b>não deseja</b> trocar a senha deixe o campo "Nova Senha" em branco.</p>
+		
+	</div>
+	
+	<div class="direito">
+    	<p><input type="text" id="titulo" value="<neos:nome/>"/></p>
+		<p><label for="sobre">Sobre:</label><br /><textarea name="sobre" cols="" rows="" id="sobre"><neos:sobre/></textarea></p>
+		<p><label for="tags">Tags (para busca):</label><br /><textarea name="tags" cols="" rows="" id="tags"><neos:tags/></textarea></p>
+		<p><label for="contatos">Contatos:</label><br /><textarea name="contatos" cols="" rows="" id="contatos"><neos:contato/></textarea></p>
+		<p>Digite palavras no campo "Tags" (separadas por vírgula) indicando sua área de trabalho, preferências, interesses (etc), para facilitar a busca.</p>
+		<p>Por exemplo: "php,neos,design,javascript".</p>
+		<p>Para o campo "Contatos", faça uma listagem com seus dados de contato.<br />Ex.: <br /> Skype: neosphp <br /> Msn: neosphp@hotmail.com	
+        <p class="comandos"><input name="" type="submit" id="salvar" value="Salvar" /></p>
+	</div>
+	
+	
+	
+	</form>		
+</div>
