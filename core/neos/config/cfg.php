@@ -34,6 +34,11 @@ class Cfg {
 
 
 	private function __construct(){
+		
+		//limitando o nível de erro nesta classe
+		ini_set('display_errors',false);
+		ini_set('display_startup_errors',false);
+		
 		//modifficando a tela de exibição de erros do PHP
 		if(function_exists('ini_set')){
 			ini_set('error_prepend_string', file_get_contents(PATH_NEOS . 'neos/error/head.html') . '<p>');
@@ -52,6 +57,8 @@ class Cfg {
 		//setando a classe de carregamento automático
 		if(!function_exists('spl_autoload_register')) $this->error("spl_autoload não foi instalado neste sistema (PHP)");
 		spl_autoload_register(array(__CLASS__, 'autoload'));
+		
+		
 	}
 	
 	/* Construtor singleton da própria classe.

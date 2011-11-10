@@ -46,7 +46,7 @@ $cfg->pathJs				= PATH_WWW . 'js' . DS;
 $cfg->urlJs					= 'js/';
 
 //TEMPLATES
-$cfg->template				= 'zurox';		//template ativo
+$cfg->template				= '';		//template ativo
 $cfg->template_path			= PATH_WWW . 'templates' . DS;      //diretório dos templates
 $cfg->template_url			= 'templates/';          //URL de acesso aos templates
 
@@ -65,8 +65,8 @@ $cfg->admin_controller		= 'control';
 
 //REPORT
 $cfg->mode					= 'test';    //pode ser production ou test (desenvolvimento)
-$cfg->status				= '';    //mostra a barra de status - opções: 'displayfile'
-$cfg->error['action']		= 'route'; //ação em caso de erro - opções: 'displayfileroutemail'
+$cfg->status				= 'display';    //mostra a barra de status - opções: 'displayfile'
+$cfg->error['action']		= 'display'; //ação em caso de erro - opções: 'displayfileroutemail'
 $cfg->error['level']		= E_ALL;    //nivel dos erros reportados/ignorados
 $cfg->logfile				= PATH_WWW . 'logs' . DS . 'log_test.txt';   //arquivo de log de erros (se 'action' contiver 'file')
 $cfg->error_route			= 'usererror';   //ir para este controller se houver erros (se 'action' contiver 'route')

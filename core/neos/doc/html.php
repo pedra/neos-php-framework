@@ -33,6 +33,7 @@ class Html
 					$varq = _cfg()->template_path . _cfg()->template . DS . 'engine' . DS . 'views' . DS . $valView . EXTVW;
 				}
 			}
+			if(!file_exists($varq)) trigger_error('<b>Não consegui localizar o arquivo da VIEW solicitada!</b> <br />Local : ' . $varq);
 			$neosarquivo = file_get_contents($varq);
 			$ret = true;
 			$ponteiro = 0;

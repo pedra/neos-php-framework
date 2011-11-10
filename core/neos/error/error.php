@@ -46,7 +46,7 @@ class Error extends \Exception {
 	 * @param $val valor a ser inserido
 	 * @return mixed conteudo da variável requerida
 	*/
-	public function error($n=0, $m='', $f='', $l='', $v=''){			
+	public function error($n=0, $m='', $f='', $l='', $v=''){					
 		$d = (count($v)>0) ? '<pre>Dados : ' . print_r($v,true) . '</pre>':'';
 		\_docFactory::this()->setBuffer(
 										self::head().
@@ -56,7 +56,7 @@ class Error extends \Exception {
 										$this->_errorGetTrace().  
 										self::footer()
 										);
-		exit;
+		exit('<p>NEOS PHP Framework - errorTracer</p>');
 	}
 	
 	/**
@@ -65,7 +65,7 @@ class Error extends \Exception {
 	 * @param $e 
 	 * @return void
 	*/
-	public static function exception($e){
+	public static function exception($e){ 
 		$m = $e->getMessage();
 		$f = $e->getFile();
 		$l = $e->getLine();
@@ -78,9 +78,8 @@ class Error extends \Exception {
 										<p>Código  : ' . $n . '</p>'.
 										self::this()->_errorGetTrace($e).  
 										self::footer()
-										);print_r(\_cfg::this());
-										
-		exit;
+										);										
+		exit('<p>NEOS PHP Framework - exceptionTracer</p>');
 	}
 	
 	/**
@@ -110,29 +109,35 @@ class Error extends \Exception {
 		$x=$e->getTrace();
 		
 		//diferente em Error/Exception		
-		if(!$isErro) {array_shift($x);array_shift($x);array_shift($x);}		
-		$x=array_reverse($x);		
+		if(!$isErro){ 
+			array_shift($x);
+			array_shift($x);
+			array_shift($x);
+		}
+		
+		//invertendo a ordem cronológica dos eventos	
+		$x = array_reverse($x);
+		
+		//lendo o registro (trace)		
 		foreach($x as $k=>$tc){
-			$content.='<tr><td>';
-			if(isset($tc['class'])){$content.= $tc['class'];}else{$content.='&nbsp;';}
-			$content.= '</td><td align="center">';
-			if(isset($tc['type'])){$content.= $tc['type'];}else{$content.='&nbsp;';}
-			$content.= '</td><td>';			
-			if(isset($tc['function'])){
-				$content.= $tc['function'].'()';
-			}else{$content.='&nbsp;';}			
-			$content.= '</td><td>';			
-
-			if(isset($tc['file'])){$content.= $tc['file'];}else{$content.='&nbsp;';}
-			$content.= '</td><td align="center">';
-			if(isset($tc['line'])){$content.= $tc['line'];}else{$content.='&nbsp;';}
-			$content.= '</td></tr>
+			$content .= '<tr><td>';
+			$content .= (isset($tc['class'])) ? $tc['class'] : '&nbsp;';
+			$content .= '</td><td align="center">';
+			$content .= (isset($tc['type'])) ? $tc['type'] : '&nbsp;';
+			$content .= '</td><td>';	
+			$content .= (isset($tc['function'])) ? $tc['function'].'()' : '&nbsp;';			
+			$content .= '</td><td>';			
+			$content .= (isset($tc['file'])) ? $tc['file'] : '&nbsp;';
+			$content .= '</td><td align="center">';
+			$content .= (isset($tc['line'])) ? $tc['line'] : '&nbsp;';
+			$content .= '</td></tr>
 			';			
 		}
+		
 		return $content . '
 			<tr><td colspan="6">&nbsp;</td></tr>
 		</table>
-		<address>Desative esta mensagem se a sua aplicação estiver em "produção". Crie um controlador para o tratamento de erros da aplicação!<br />Você pode encontrar mais informações no <b><a href="">manual</a></b> do NEOS.</address>		
+		<address>Desative esta mensagem se a sua aplicação estiver em "produção". Crie um controlador para o tratamento de erros da aplicação!<br />Você pode encontrar mais informações no <b><a href="http://neosphp.com/manual">manual</a></b> do NEOS.</address>		
 	</div>';
 	}	
 	
@@ -153,4 +158,5 @@ class Error extends \Exception {
 	public static function footer(){
 		return file_get_contents( dirname(__FILE__) . '/footer.html' );
 	}
+	
 }

@@ -28,7 +28,11 @@ class Main {
 	/** Referencia Singleton!
 	 */
 	static $THIS = array();
-
+	
+	/** Url decodificada (sem a sub_uri e outros ruídos)
+	 */
+	public $varUrl = '';
+	
 	/** Partição da url que não pertence ao caminho (veja manual)
 	 */
 	public $varSubUri = '';
@@ -135,8 +139,8 @@ class Main {
 	/**
 	 * Montagem da aplicação
 	 */
-	final static function run($state = 'production'){
-		self::mount($state)
+	final static function run($state = 'production', $subUri = ''){
+		self::mount($state, $subUri)
 			->control()
 			->produce()
 			->dismount();
@@ -145,7 +149,7 @@ class Main {
 	/**
 	 * Montagem da aplicação
 	 */
-	final static function mount($state = 'production'){
+	final static function mount($state = 'production', $subUri = ''){
 
 		//Estado da Aplicação (text/production)
 		self::$varState = (in_array($state, self::$arrayStates)) 
@@ -160,9 +164,12 @@ class Main {
 		if(defined('URL_PRE')) return false;
 
 		//resolve a URL
-		self::this()->varSubUri = self::_defSubURi();
-		_cfg::get()->args = trim(urldecode(str_replace(basename($_SERVER['SCRIPT_NAME']), '', str_replace(self::this()->varSubUri, '', $_SERVER['REQUEST_URI']))), '/');
-		_cfg::get()->uri = str_replace('/' . basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['REQUEST_URI']);
+		self::this()->varSubUri = $subUri;
+		self::this()->varUrl = trim(str_replace($subUri, '', $_SERVER['REQUEST_URI']), '/ ');
+		
+		//gravando na configuração do sistema
+		_cfg::get()->args = trim(urldecode(str_replace(self::this()->varSubUri, '', self::this()->varUrl)), '/');		
+		_cfg::get()->uri = self::this()->varUrl;
 
 		//start buffer e callback de saída
 		ob_start(array(_docFactory::this(), 'outBuffer'));
@@ -308,26 +315,6 @@ class Main {
 
 		//retornando o objeto
 		return self::this();
-	}
-
-	/*
-	* Verifica a existencia de uma camada extra na URL
-	* ex.: quando precisa ser indicado um sub-diretório além do domínio ( http://localhost/sub-diretório/....)
-	*/
-	public static function _defSubURi() {
-		$path = explode('/', trim(dirname($_SERVER['SCRIPT_FILENAME']), '/ '));		
-		$uri = explode('/',trim(str_replace('/' . basename($_SERVER['SCRIPT_FILENAME']),'',$_SERVER['REQUEST_URI']), '/ '));
-		$sub_uri = '';
-		
-		foreach($path as $p){
-			if($path[0] == $uri[0]) {
-				$sub_uri .= $uri[0] . '/';
-				array_shift($uri);
-			}
-			array_shift($path);		
-		}
-		//é possível pegar a url limpa: $URL = implode('/', $uri);
-		return $sub_uri;		
 	}
 
 	/*

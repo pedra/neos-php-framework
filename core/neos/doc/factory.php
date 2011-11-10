@@ -189,7 +189,7 @@ class Factory
 			
 			$this->objRender->process();
 		//se não usar template chama a classe de processamento de views normal
-		} else { 
+		} else {
 		
 			$this->objRender = Html::this();
 			$this->objRender->produce();
