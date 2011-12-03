@@ -1,9 +1,0 @@
-/* CSS Document */
-
-body {margin:20px 0}
-table tr th { background:#036; color:#FFF}
-.footer { padding:5px 0; margin:20px 0 0 0; border-bottom:1px solid #DDE; border-top:1px solid #DDE; color:#CCC}
-.footer a { color:#CCF; text-decoration:none }
-.footer a:hover { color:#77F}
-.quiet { text-align:right; color:#CCC}
-.quiet b {color:#999}
