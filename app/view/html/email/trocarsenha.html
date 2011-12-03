@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>NEOS PHP Framework - Ativação de Cadastro</title>
+<style>
+*{font-family:"Trebuchet MS",Arial,Tahoma,Helvetica,Geneva,sans-serif;margin:0;padding:0;line-height:120%;color:#FFF}
+body{width:700px;margin:20px auto;padding:20px;border:1px solid #678;background:#345}
+a{color:#069}
+b{font-size:1.5em}
+div {margin:10px 0;padding:20px;border:1px solid #000;background:#FFF}
+div p{color:#345}
+div p b{color:#345;font-size:1.1em}
+span{color:#9AB;font-style:italic;font-size:0.75em}
+</style>
+</head>
+<body>
+<p>Olá, <b><neos:nome/></b>!</p>
+<p>Uma solicitação de troca de senha foi feita para seu e-mail</p>
+<div>
+<p>Use o link abaixo para acessar sua página e trocar sua senha:</p>
+<p><a href="http://neosphp.com/user/ativar/<neos:codigo/>" target="_new">http://neosphp.com/user/ativar/<neos:codigo/></a></p>
+<p>O link funcionará apenas <b>uma</b> vez.</p> 
+</div>
+<span>Caso você não tenha solicitado a troca de senha entre em contato com o administrador do site: contato@neosphp.com.</span>
+</body>
+</html>

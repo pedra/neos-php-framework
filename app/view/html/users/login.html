@@ -1,0 +1,78 @@
+
+<div class="container users">
+	
+	<div id="listagem" class="listagem">
+		<h2>Bem Vindo!</h2>
+		<ul>
+			<li id="gsenha">Esqueci minha senha!</li>
+			<li id="gcadastrar">Quero me cadastrar como usuário.</li>
+			<li id="gentrar">Entrar / Sair do sistema.</li>
+			<li id="gpesquisar">Pesquisar por usuários.</li>
+		</ul>	
+	
+	</div>
+		
+	<div id="formularios" class="formularios">
+	
+		<div id="fentrar">
+			<div class="<neos:entrar/>">
+				<h2>Entrar</h2>
+				<label for="login">Login:</label>
+				<p class="quiet">Código de acesso ou e-mail.</p>
+				<p><input type="text" name="login" id="login" value=""/></p>
+				<label for="lsenha">Senha:</label>
+				<p><input type="password" name="senha" id="senha" /></p>
+				<p><input type="button" id="go_login" value="Entrar"/></p>
+			</div>
+			<div class="sair <neos:sair/>">
+				<h2>Sair do Sistema</h2>
+				<p>Se deseja sair deste sistema clique abaixo:</p>
+				<p><input type="button" id="go_logout" value="Logout"/></p>
+			</div>
+		</div>
+		
+		<div id="fsenha">
+			<h2>Trocar Senha!</h2>
+			<p>Digite seu e-mail e receberá um link para trocar sua senha.</p>
+			<label for="tmail">E-mail:</label>
+			<p><input type="text" name="tmail" id="tmail" value=""/></p>
+			<p><input type="button" id="go_senha" value="Trocar Senha"/></p>
+		</div>
+		
+		<div id="fcadastrar">
+			<h2>Cadastro</h2>	
+			<label for="cmail">E-mail:</label>
+			<p class="quiet">Será usado para ativação do cadastro.</p>
+			<p><input type="text" name="cmail" id="cmail" value=""/></p>
+			<label for="cnome">Nome:</label>
+			<p class="quiet">Seu nome ou apelido...</p>
+			<p><input type="text" name="cnome" id="cnome" value=""/></p>
+			<label for="csenha">Senha:</label>
+			<p class="quiet">Senha de 6 a 20 dígitos.</p>
+			<p><input type="password" name="csenha" id="csenha" /></p>
+			<p>Este é somente um pré-cadastro! Enviaremos um link para seu e-mail para editar seus dados diretamente em sua página pessoal.</p>
+			<p><input type="button" id="go_cadastrar" value="Cadastrar"/></p>
+		</div>
+		
+		<div id="fpesquisar">
+			<h2>Pesquisar</h2>
+			<label for="pesquisar">Buscar por:</label>
+			<p><input type="text" name="pesquisar" id="pesquisar" value=""/> <input type="button" id="go_pesquisar" value="&gt;&gt;"/></p>
+			<p>
+				<ul>
+					<li><label><input name="pesq_nome" type="checkbox" value="nome" />Nome</label></li>
+					<li><label><input name="pesq_local" type="checkbox" value="local" />Localidade (pais, estado e cidade)</label></li>
+					<li><label><input name="pesq_tags" type="checkbox" value="tags" />Tags (área de atuação, trabalhos, etc.)</label></li>
+				</ul>
+			</p>
+		</div>
+		
+		<div id="fpesq_result">			
+			<div id="fpesq_result_span"></div>
+			<hr />
+			<p>Passe o mouse sobre as fotos para ver o nome do usuário. Clique e será direcionado a página pessoal.</p>		
+		</div>
+
+	</div>
+			
+</div>

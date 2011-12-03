@@ -1,0 +1,26 @@
+<div class="container manual">
+	
+	<neos:modulo name="menu" baselink="manual/" book="manual" class="menu"/>
+	
+	<div class="conteudo">
+	
+		<div class="conteudo_topo">
+			<neos:tools/>
+		</div>
+		
+		<h2><neos:titulo/></h2>
+		
+		<form method="post" action="<neos:url/>inicial/salvar/<neos:id/>"/>
+			<div id="cconteudo">			
+				<neos:conteudo/>			
+			</div>
+		</form>
+		
+		<div class="comentarios">
+			<h2>Comentários</h2>			
+			<neos:modulo name="comentario" book="manual" />					
+		</div>
+		
+	</div>
+	
+</div>
