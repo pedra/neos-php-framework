@@ -1,0 +1,58 @@
+<neos:_style href="css/screen.css" media="all" />
+<neos:_style href="css/zurox.css" media="all" rel="template" />
+<neos:_style href="site_print.css" media="print"/>
+
+<neos:_script href="jquery.js" />
+<neos:_script href="neosite.js" />
+
+<neos:_head/>
+
+<body>
+
+	<div class="container">
+	
+		<div id="cabessa">
+			<h1>NEOS PHP Framework</h1>
+			<div class="logotipo"><a href="<neos:url_link/>">&nbsp;</a></div>
+			<div class="topmenu">
+				<ul>
+					<li><a <neos:smanual/> href="<neos:url_link/>manual">Manual</a></li>
+                    <li><a <neos:sdownload/> href="<neos:url_link/>download">Download</a></li>
+                    <li><a <neos:sscreencast/> href="<neos:url_link/>screencast">ScreenCast</a></li>
+                    <li><a <neos:sforum/> href="<neos:url_link/>forum">Fórum</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="subTopo">
+			<div>Tema : <neos:select var="themas" id="changeTheme" title="Escolha um tema para o site" multi/></div>
+			<neos:modulo name="login"/>
+		</div>
+
+		<div id="corpo">
+		
+			<neos:_area name="body"/>
+
+			<div id="rodape">
+
+				<div class="links">
+					<ul>
+						<li><a <neos:smanual/> href="<neos:url_link/>manual">Manual</a></li>
+						<li><a <neos:sdownload/> href="<neos:url_link/>download">Download</a></li>
+						<li><a <neos:sscreencast/> href="<neos:url_link/>screencast">ScreenCast</a></li>
+						<li><a <neos:sforum/> href="<neos:url_link/>forum">Fórum</a></li>
+					</ul>
+				</div>
+				<div class="texto">
+					<h4>NEOS PHP Framework &copy;&reg; 2011</h4>
+					<p>O uso, modificação e criação de software baseado é livre segundo os termos da <a href="<neos:url_link/>licenca.neos">licença</a>. Se voçê gostou do NEOS, então, ajude a manter este site! Colabore com sugestões, críticas, idéias, scripts, helpers, classes, coreMod, ou ainda com a doação de qualquer quantia usando o <a href="<neos:url_link/>contatos">PagueSeguro</a>.</p>
+				</div>
+
+
+			</div>
+			
+		</div>
+
+	</div>
+
+<neos:_footer/>

@@ -1,0 +1,4 @@
+Alias | Driver | DSN | Host | DataBase | User | Pasword | Charset
+mysql_pdo | pdo | mysql:host=localhost;dbname=neos2                                  |  |  | neos2 | a123456 | 
+Sqlite | sqlite | PATH_APP . 'neos.db' |  |  |  |  | 
+Mysql | mysql |   | localhost | neos2 | neos2 | a123456 | utf8  

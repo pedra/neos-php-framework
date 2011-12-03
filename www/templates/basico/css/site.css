@@ -1,0 +1,143 @@
+/*	NEOS PHP Framework
+	Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
+	Paulo R. B. Rocha - prbr@ymail.com
+	http://neosphp.com*/
+
+*{color:#555}
+body{background:#000 url(../img/grade.jpg) center top no-repeat;}
+h2{ margin:0 0 5px 0}
+p{ margin:0 0 5px 0; padding:0; line-height:130%}
+input[type=submit],
+input[type=button]{background:url(../img/botao.png);padding:5px 20px;border:none;cursor:pointer;margin:0 20px 0 0;color:#FFF}
+/*code, blockquote { margin-left: 10px;padding:10px 0 10px 50px;color:#039; background:url(../img/lquote.png) left top no-repeat}
+code *, blockquote * {color:#039}*/
+pre { margin:0; padding:30px 0; overflow:hidden}
+
+.container{min-height:620px;background: url(../img/fmenu.png) repeat;padding:5px 20px 40px 20px; border-bottom:1px solid #222}
+
+/*HOME*/
+.noscript{text-align:center;margin:0 auto}
+.noscript a{text-decoration:none;margin:0}
+
+.home {background:#FFF;min-height:620px;padding:20px}
+.home .home_inicial{background:url(../img/home.jpg) center center no-repeat;height:620px}
+.home .home_final{display:none;height:620px;background:url(../img/logotipo.jpg) center 80px no-repeat}
+.logotipo{display:block;height:222px}
+.texto{margin:180px auto 20px;width:577px}
+
+/*GERAL*/
+.topo {height:40px}
+.topo .wid { width:950px; margin:0 auto; text-align:center; height:40px; padding:0 20px}
+.topo .wid h2 { float:left; padding:9px 0 9px 90px; margin-left:-22px; font-size:15px; color:#FFF; background:url(../img/logo.png) left -18px no-repeat}
+.topo .wid a { text-decoration:none}
+.topo .wid .links { float:right; margin:-2px 20px}
+.topo .wid .links * { color:#000; margin:0; display:inline; text-decoration:none}
+.topo .wid .links a:hover { color:#FFF}
+.topo .wid .links li a.selected {color:#FFF; background:url(../img/brilho.png) center no-repeat}
+.topo .wid .links li a {display:inline-block; font-size:13px; padding:10px; margin:0; min-width:65px}
+
+.subTopo { display:block;width:950px; margin:0 auto; text-align:right}
+.subTopo * { display:inline;}
+.subTopo div { margin:0 10px; color:#EEE}
+.subTopo .fastlogin * {text-align:right; margin:-15px auto 5px auto;color:#EEE}
+.subTopo .fastlogin input {padding:2px}
+.subTopo .fastlogin input[type=submit] {padding:2px 5px; margin-left:5px}
+
+
+/*MENU*/
+.menu {float:left; padding:20px 0; margin-top:0px; width:240px}
+.menu * { display:block; list-style:none; text-decoration:none; color:#777}
+.menu li {padding:3px 0;list-style:none}
+.menu a {text-decoration:none; padding-left:13px; background: url(../img/lst.gif) left center no-repeat}
+.menu a:hover {color:#FFC}
+.menu a.selected { color:#FFC}
+
+.conteudo { float:left; width:690px; background:url(../img/back.png) center center no-repeat}
+.conteudo .conteudo_topo .tools {float:right; margin:0 }
+.conteudo .conteudo_topo .tools input{border:1px solid transparent;width:16px;height:16px;padding:10px;margin:0}
+.conteudo .conteudo_topo .tools input:hover{border:1px solid #CCC}
+.conteudo .conteudo_topo .tools #editar{background:url(/img/icones/edit.png) center center no-repeat}
+.conteudo .conteudo_topo .tools #salvar{background:url(/img/icones/save.png) center center no-repeat}
+.conteudo .conteudo_topo .tools #cancelar{ display:none;background:url(/img/icones/cross.png) center center no-repeat}
+
+.conteudo object { padding:0 25px}
+.conteudo li {padding-left:5px;margin-left:20px}
+.conteudo p { margin-top:20px}
+.conteudo h2, .conteudo h3, .conteudo h4{ margin:20px 0}
+.conteudo #conteudo {float:left;width:100%}
+.conteudo #editform {display:none}
+.conteudo #editform textarea {display:none;width:690px}
+.conteudo #editform input[type=submit] {background:url(/img/icones/save.png) center center no-repeat;float:right}
+.conteudo #editform input[type=button] {background:url(/img/icones/cross.png) center center no-repeat;float:right}
+.conteudo #editform input {float:left;border:1px solid transparent;width:16px;height:16px;padding:10px;margin:0}
+.conteudo #editform input:hover { border:1px solid #CCC}
+
+/*MANUAL*/
+.conteudo #cconteudo { border:none; width:100%;}
+
+.comentarios { margin:20px 0;}
+.comentarios h2 {background:url(/img/icones/com.png) left center no-repeat; padding-left:30px; border-top:1px solid #000}
+.comentarios h2, .comentarios h3 { margin-top:20px}
+.comentarios .coment {width:100% ; border-bottom:1px solid #EEE}
+.comentarios .coment.even { background:#FFE}
+.comentarios .coment img { cursor:pointer; margin-bottom:-4px}
+.comentarios .coment .barra {background:#F9F9F9 url(/img/user.png) left center no-repeat; padding:5px 0}
+.comentarios .coment span.user {  font-weight:bold; padding-left:30px; max-width:50%;}
+.comentarios .coment span.date { font-size:10px; color:#999; float:right}
+.comentarios .content {padding:5px; padding-bottom:20px}
+.comentarios .comentar { margin-top:15px}
+.comentarios .comentar textarea {width:690px; height:128px}
+.comentarios .comentar input[type=button]{margin:5px 2px; width:97px}
+
+/*DOWNLOADS*/
+.download { background:#FFF url(../img/back.png) center center no-repeat}
+.download div.div1 { float:left; margin:100px 0 50px 50px; width:550px}
+.download div.div1 h2 { margin:30px 0}
+.download div.div2 { float:left; width:300px; height:540px; background:url(../img/dload.png) left center no-repeat}
+.download .zip { background:url(../img/zip22.png) left bottom no-repeat; padding-left:30px}
+.download .pdf { background:url(../img/pdf22.gif) left center no-repeat; padding-left:30px}
+.download .licenca { clear:both; margin:70px 0 0 50px; padding:50px 0 0 0}
+
+/*SCREENCAST*/
+.screencast .titulo-video { margin:10px 0}
+.screencast .menu a {background:url(../img/video22off.png) -5px center no-repeat; padding-left:25px}
+.screencast .menu a.selected {background:url(../img/video22.png) -5px center no-repeat}
+
+/*USUARIOS*/
+.users { background:#FFF url(../img/back.png) center center no-repeat; padding:20px; min-height:300px}
+.users .listagem{ float:left; width:300px; margin:180px 0 180px 150px;}
+.users .listagem ul { padding-left:20px}
+.users .listagem ul li {color:#06C; text-decoration:underline; cursor:pointer; list-style:none; list-style-image: url(../img/lst.gif) }
+.users .formularios { float:left; margin:80px 0 50px 20px; width:335px}
+.users .formularios #fsenha{margin-top:80px; display:none}
+.users .formularios .sair {margin-top:100px}
+.users .formularios #fentrar {margin-top:50px}
+.users .formularios input[type=text],
+.users .formularios input[type=password]{ padding:2px; font-size:1.3em}
+.users .formularios p.quiet {color:#C66; font-style:italic; font-size:0.9em; margin:0; padding:0}
+.users .formularios #fcadastrar{ margin-top:-10px; display:none}
+.users .formularios #fpesquisar{ display:none; margin-top:85px}
+.users .formularios #fpesquisar #pesquisar { width:275px}
+.users .formularios #fpesquisar #go_pesquisar {padding:4px 5px 3px 5px}
+.users .formularios #fpesquisar ul { list-style:none; padding-left:0}
+.users .formularios #fpesq_result { height:175px;  display:none}
+.users .formularios #fpesq_result_span {overflow:auto; height:170px}
+
+.users #titulo {width:100%; font-size:48px; font-family:"Trebuchet MS",Arial,Helvetica,sans-serif; padding:0; margin:0; font-weight:bold; border:none; color:#669}
+.users #sobre { width:610px; margin:0; padding:0}
+.users #tsobre { width:600px; margin:0 50px 20px 0; padding:0; height:300px; overflow:auto}
+.users #contatos,
+.users #tags {width:100%; height:30px}
+.users .comandos { text-align:right}
+.users .left{ float:left; width:300px; padding:10px; margin-right:10px; background:#EEE; min-height:400px}
+.users .left .fotoimg { width:300px; height:400px; background:#000; border:1px solid #000}
+.users .left .coluna {float:left; width:150px}
+.users .left input[type=text],
+.users .left input[type=password] { width:140px}
+.users .right { float:right; width:600px; margin-right:20px; max-height:400px}
+
+/*FOOTER*/
+.footer .wid {width:990px; margin:0 auto; padding:20px 0 40px 0}
+.footer .wid * {color:#999; text-decoration:none; list-style-image:url(../img/lst.gif);}
+.footer .wid p { padding:0; margin:0; line-height:130%; font-size:10px}
+.footer .wid a { text-decoration:underline}

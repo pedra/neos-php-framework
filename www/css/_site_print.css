@@ -1,0 +1,58 @@
+/*	NEOS PHP Framework
+	Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
+	Paulo R. B. Rocha - prbr@ymail.com
+	http://neosphp.com*/
+	
+@charset "utf-8";
+*{color:#555}
+body{background:#FFF;}
+h2{ margin:0 0 5px 0}
+p{ margin:0 0 5px 0; padding:0; line-height:130%}
+input[type=submit], input[type=button]{display:none}
+
+.container{border:none}
+
+/*HOME*/
+.home {margin:100px auto; width:577px;}
+
+.home .home_inicial { background:url(../img/splash/home.jpg) center center no-repeat; width:577px; height:400px;}
+.home .home_final { display:none}
+.logotipo {display:block;background:url(../img/splash/logotipo.jpg) center center no-repeat;height:222px;}
+.texto {width:577px; margin:60px auto}
+
+
+/*GERAL*/
+.topo {height:60px; z-index:2000; background:#345; border-bottom:1px solid #000}
+.topo .wid { width:950px; margin:0 auto; text-align:center}
+.topo .wid h2 { float:left; padding:0; color:#000}
+.topo .wid a { text-decoration:none}
+.topo .wid .links {display:none}
+
+/*MANUAL*/
+.manual {min-height:700px; background:#FFF url(../img/back.png) center center no-repeat; padding-bottom:0}
+
+.manual .menu { display:none}
+
+.manual .conteudo .conteudo_topo { width:100%; margin:20px 0; padding:0;}
+.manual .conteudo .conteudo_topo * { display:inline}
+.manual .conteudo .conteudo_topo span#breadcumbs { padding:0; }
+.manual .conteudo .conteudo_topo ul {display:none}
+
+.manual .conteudo li { list-style:square; padding-left:5px; margin-left:20px}
+.manual .conteudo #conteudo { width:100%;}
+.manual .conteudo #editform { display:none}
+
+code, blockquote { border-left:5px solid #CCC; padding:10px 0 10px 10px;}
+code *, blockquote * {color:#870}
+
+.comentarios { margin:20px 0;}
+.comentarios h2 {border-top:1px solid #000}
+.comentarios h2, .comentarios h3 { margin:20px 0 10px 0; padding:0}
+.comentarios .coment { width:100%; border-bottom:1px dashed #888}
+.comentarios .coment span.user { font-weight:bold; max-width:50%; padding:0;}
+.comentarios .coment span.date { font-size:10px; color:#999; float:right}
+.comentarios .content { clear:both; padding:5px; margin-bottom:10px}
+.comentarios .comentar { display:none}
+
+
+.footer{display:none}
