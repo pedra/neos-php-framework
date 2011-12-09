@@ -1,0 +1,2 @@
+#labels questions,moderator,perguntas,respostas,questões,informações
+<wiki:gadget url="http://www.google.com/moderator/static/moderator-embed-gadget.xml" height="600" width="900" up_url="http://www.google.com/moderator/#16/e=19d464" up_sort="HOT" up_hl="en" />
