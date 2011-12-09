@@ -1,0 +1,76 @@
+#summary One-sentence summary of this page.
+#labels DB,database,bancodedados,conector,connect,_db
+Como acessar os bancos de dados na versão 2.0 do NEOS
+
+
+= Introduction =
+
+A versão 2.0 do NEOS introduz conceitos de orientação a objeto oriundas das atualizações da versão 5.3.x do PHP, contribuindo para uma estruturação mais moderna do código do framework e sua aplicação (sites).
+
+
+= O Diretório DB =
+
+Abrindo o diretório DB (core/neos/db) podemos ver uma estrutura que se repete em outros diretórios do neos. Encontramos dois arquivos principais com os nomes de "abstract.php" e "interface.php". São, respectivamente, uma classe abstrata base e sua interface.
+O segundo arquivo neste diretório e o "conector.php". A própria classe "DB".
+
+== A classe Conector ==
+
+Tudo o acesso a banco de dados é feito através desta classe que possui os seguintes métodos:
+
+=== connect ===
+
+*sintaxe: $objDriver = Neos\Db\Conector->connect([string $alias]);*
+
+Este método retorna um objeto "driver" que proporciona o acesso ao banco de dados indicado pelo 'alias' (argumento da função);
+Um 'alias' (ou apelido) pode ser definido nos arquivos de configuração (core/neos/config/database.php) sonforme esse exemplo:
+
+`$cfg->db->alias->driver = 'sqlite';`
+`$cfg->db->alias->database = 'caminho completo para o arquivo sqlite';`
+
+Onde 'alias' pode ser qualquer apelido para a conexão de banco de dados configurada e, neste caso, 'database' indica o parâmetro de conexão com o arquivo do sqlite.
+Existem outros parâmetros como: 'host', 'user', 'pass', 'charset', 'dsn'. 
+
+=== query ===
+
+*sintaxe: mixed $ret = Neos\Db\Conector->query(string $sql [, String $alias]);*
+
+O método faz uma simples consulta no banco de dados especificado em $alias ou, na ausência deste parâmetro, no alias default.
+O retorno ($ret) pode ser de vários tipos, conforme o tipo da QUERY.
+
+---
+Exemplo (usando class_alias):
+
+$ret = _db::query('SELECT * FROM `TABELA`');
+if($ret){
+    foreach($ret as $key=>$val){
+        echo '<p>' . $key . ': ' . $val . '</p>';
+    }
+}
+else{
+    echo '<p>A consulta não retornou dados.</p>';
+}
+---
+
+=== insert ===
+
+
+=== update ===
+
+
+=== delete ===
+
+
+=== clear ===
+
+
+=== create ===
+
+== PDO ==
+
+
+---
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
