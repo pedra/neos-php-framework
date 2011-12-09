@@ -1,9 +1,10 @@
-#summary One-sentence summary of this page.
 #labels DB,database,bancodedados,conector,connect,_db
+<g:plusone size="medium"></g:plusone>
 Como acessar os bancos de dados na versão 2.0 do NEOS
 
 
 = Introduction =
+Introdução
 
 A versão 2.0 do NEOS introduz conceitos de orientação a objeto oriundas das atualizações da versão 5.3.x do PHP, contribuindo para uma estruturação mais moderna do código do framework e sua aplicação (sites).
 
