@@ -37,10 +37,10 @@ Existem outros parâmetros como: 'host', 'user', 'pass', 'charset', 'dsn'.
 O método faz uma simples consulta no banco de dados especificado em $alias ou, na ausência deste parâmetro, no alias default.
 O retorno ($ret) pode ser de vários tipos, conforme o tipo da QUERY.
 
----
+----
 Exemplo (usando class_alias):
 
-$ret = _db::query('SELECT * FROM `TABELA`');
+$ret = _db::query('SELECT * FROM TABELA');
 if($ret){
     foreach($ret as $key=>$val){
         echo '<p>' . $key . ': ' . $val . '</p>';
@@ -49,7 +49,7 @@ if($ret){
 else{
     echo '<p>A consulta não retornou dados.</p>';
 }
----
+----
 
 === insert ===
 
