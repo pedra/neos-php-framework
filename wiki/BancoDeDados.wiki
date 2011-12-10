@@ -20,25 +20,32 @@ Tudo o acesso a banco de dados é feito através desta classe que possui os segu
 
 === connect ===
 
-*sintaxe: $objDriver = Neos\Db\Conector->connect([string $alias]);*
+{{{
+    sintaxe: $objDriver = Neos\Db\Conector->connect([string $alias]);
+}}}
 
 Este método retorna um objeto "driver" que proporciona o acesso ao banco de dados indicado pelo 'alias' (argumento da função);
 Um 'alias' (ou apelido) pode ser definido nos arquivos de configuração (core/neos/config/database.php) sonforme esse exemplo:
 
-`$cfg->db->alias->driver = 'sqlite';`
-`$cfg->db->alias->database = 'caminho completo para o arquivo sqlite';`
+{{{
+$cfg->db->alias->driver = 'sqlite';
+$cfg->db->alias->database = 'caminho completo para o arquivo sqlite';
+}}}
 
 Onde 'alias' pode ser qualquer apelido para a conexão de banco de dados configurada e, neste caso, 'database' indica o parâmetro de conexão com o arquivo do sqlite.
 Existem outros parâmetros como: 'host', 'user', 'pass', 'charset', 'dsn'. 
 
 === query ===
 
-*sintaxe: mixed $ret = Neos\Db\Conector->query(string $sql [, String $alias]);*
+{{{
+    sintaxe: mixed $ret = Neos\Db\Conector->query(string $sql [, String $alias]);
+}}}
 
 O método faz uma simples consulta no banco de dados especificado em $alias ou, na ausência deste parâmetro, no alias default.
 O retorno ($ret) pode ser de vários tipos, conforme o tipo da QUERY.
 
-----
+
+{{{
 Exemplo (usando class_alias):
 
 $ret = _db::query('SELECT * FROM TABELA');
@@ -50,28 +57,23 @@ if($ret){
 else{
     echo '<p>A consulta não retornou dados.</p>';
 }
-----
 
-=== insert ===
+}}}
 
-
-=== update ===
+<h3>Insert</h3>_em construção_
 
 
-=== delete ===
+<h3>Update</h3>_em construção_
 
 
-=== clear ===
+<h3>Delete</h3>_em construção_
 
 
-=== create ===
-
-== PDO ==
+<h3>Clear</h3>_em construção_
 
 
----
+<h3>Create</h3>_em construção_
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+
+<h2>PDO (PHP Data Object)</h2>_em construção_
+
