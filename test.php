@@ -10,7 +10,7 @@
 	 */
 	 
 	//Carregando o framework
-	include '../core/main.php';
+	include 'core/main.php';
 	
 	//Rodando a aplicação -> modo de teste <-
 	Main::run('test');	
