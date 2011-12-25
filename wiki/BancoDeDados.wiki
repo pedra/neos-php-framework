@@ -22,7 +22,7 @@ A classe possui os seguintes métodos:
 === connect ===
 
 {{{
-    sintaxe: $objDriver = Neos\Db\Conector->connect([string $alias]);
+    sintaxe: object $objDriver = Neos\Db\Conector::connect([string $alias]);
 }}}
 
 Este método retorna um objeto "driver" que proporciona o acesso ao banco de dados indicado pelo 'alias' (argumento da função);
