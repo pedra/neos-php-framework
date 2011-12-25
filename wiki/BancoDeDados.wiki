@@ -26,7 +26,7 @@ A classe possui os seguintes métodos:
 }}}
 
 Este método retorna um objeto "driver" que proporciona o acesso ao banco de dados indicado pelo 'alias' (argumento da função);
-Um 'alias' (ou apelido) pode ser definido nos arquivos de configuração (core/neos/config/database.php) sonforme esse exemplo:
+Um 'alias' (ou apelido) pode ser definido nos arquivos de configuração (core/neos/config/database.php) como neste exemplo:
 
 {{{
 $cfg->db->alias->driver = 'sqlite';
