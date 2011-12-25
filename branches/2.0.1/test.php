@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 	/**
 	 * Index da aplicação - versão para testes
 	 * @copyright	NEOS PHP Framework - http://neosphp.com
@@ -10,7 +10,7 @@
 	 */
 	 
 	//Carregando o framework
-	include 'core/main.php';
+	include 'framework/main.php';
 	
 	//Rodando a aplicação -> modo de teste <-
 	Main::run('test');	
