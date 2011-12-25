@@ -29,8 +29,8 @@ Este método retorna um objeto "driver" que proporciona o acesso ao banco de dad
 Um 'alias' (ou apelido) pode ser definido nos arquivos de configuração (core/neos/config/database.php) como neste exemplo:
 
 {{{
-$cfg->db->alias->driver = 'sqlite';
-$cfg->db->alias->database = 'caminho completo para o arquivo sqlite';
+    $cfg->db->alias->driver = 'sqlite';
+    $cfg->db->alias->database = 'C:\caminho\arquivo_sqlite.db';
 }}}
 
 Onde 'alias' pode ser qualquer apelido para a conexão de banco de dados configurada e, neste caso, 'database' indica o parâmetro de conexão com o arquivo do sqlite.
@@ -47,17 +47,17 @@ O retorno ($ret) pode ser de vários tipos, conforme o tipo da QUERY.
 
 
 {{{
-Exemplo (usando class_alias):
+    Exemplo (usando class_alias):
 
-$ret = _db::query('SELECT * FROM TABELA');
-if($ret){
-    foreach($ret as $key=>$val){
-        echo '<p>' . $key . ': ' . $val . '</p>';
+    $ret = _db::query('SELECT * FROM TABELA');
+    if($ret){
+        foreach($ret as $key=>$val){
+            echo '<p>' . $key . ': ' . $val . '</p>';
+        }
     }
-}
-else{
-    echo '<p>A consulta não retornou dados.</p>';
-}
+    else{
+        echo '<p>A consulta não retornou dados.</p>';
+    }
 
 }}}
 
