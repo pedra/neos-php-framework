@@ -39,7 +39,7 @@ Existem outros parâmetros como: 'host', 'user', 'pass', 'charset', 'dsn'.
 === query ===
 
 {{{
-    sintaxe: mixed $ret = Neos\Db\Conector->query(string $sql [, String $alias]);
+    sintaxe: mixed $ret = Neos\Db\Conector::query(string $sql [, String $alias]);
 }}}
 
 O método faz uma simples consulta no banco de dados especificado em $alias ou, na ausência deste parâmetro, no alias default.
