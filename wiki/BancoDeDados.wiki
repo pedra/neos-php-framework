@@ -14,7 +14,7 @@
 <p>Abrindo o diretório DB (core/neos/db) podemos ver uma estrutura que se repete em outros diretórios do neos. Encontramos dois arquivos principais com os nomes de "abstract.php" e "interface.php". São, respectivamente, uma classe abstrata base e sua interface.
 O segundo arquivo neste diretório e o "conector.php". A própria classe "DB".</p>
 
-<h3>A classe Conector<h3>
+<h3>A classe Conector</h3>
 
 Todo o acesso a banco de dados no NEOS é feito por essa classe. Evidentemente um acesso da forma convencional, usando classes (PDO, Mysql,etc) e funções nativas da linguagem PHP pode ser usado, porém, padronizar o uso através desta classe pode ser muito mais vantajoso.
 
@@ -43,10 +43,8 @@ Existem outros parâmetros como: 'host', 'user', 'pass', 'charset', 'dsn'.
 O método faz uma simples consulta no banco de dados especificado em $alias ou, na ausência deste parâmetro, no alias default.
 O retorno ($ret) pode ser de vários tipos, conforme o tipo da QUERY.
 
-
+<b>Exemplo (usando class_alias):</b>
 <code>
-    Exemplo (usando class_alias):
-
     $ret = _db::query('SELECT * FROM TABELA');
     if($ret){
         foreach($ret as $key=>$val){
@@ -62,8 +60,8 @@ O retorno ($ret) pode ser de vários tipos, conforme o tipo da QUERY.
     sintaxe: mixed $ret = Neos\Db\Conector::insert(array $campos, string $tabela [, String $alias]);</code>
 
 <p>O array '$campos' deve conter um par nome_do_campos => valor para cada campo (coluna) da linha que se deseja inserir no banco de dados.</p>
-
-<code>Exemplo:
+<b>Exemplo:</b>
+<code>
     $campos = array ( 'nome'       => 'Paulo',
                       'sobre_nome' => 'R. B. Rocha',
                       'status'     => 'ativo');
@@ -77,7 +75,8 @@ O retorno ($ret) pode ser de vários tipos, conforme o tipo da QUERY.
 <p>O array '$campos' funciona da mesma forma como no método insert.</p>
 <p>$where é uma string contendo a cláusula WHERE sql.</p>
 
-<code>Exemplo:
+<b>Exemplo:</b>
+<code>
     $campos = array ( 'nome'       => 'Paulo',
                       'sobre_nome' => 'R. B. Rocha',
                       'status'     => 'ativo');
