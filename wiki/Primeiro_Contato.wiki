@@ -13,6 +13,7 @@
 <p>Como pré-requisito você precisa:</p>
 <ul>
 <li>Servidor web Apache (de acesso público ou instalado em sua máquina de teste)</li>
+<li>Módulo re-write do Apache ativado</li>
 <li>O PHP na versão 5.3(+) instalado</li>
 </ul>
 
@@ -37,7 +38,9 @@
 <code>
 root --- pasta raiz do servidor Apache
 
+    
     root/neos.phar
+    root/.htacess
     root/index.php //necessário somente se o servidor não reconhecer arquivos PHAR
     root/app/.htaccess
     root/app/controller/inicial.php
@@ -57,6 +60,27 @@ você pode criar outras pastas conforme a necessidade de sua aplicação
 <code><?php
     include 'phar://neos.phar/main.php';
     Main::run();</code>
+
+<h3>/.htaccess</h3>
+<b>Conteúdo:</b>
+<code>
+    <IfModule mod_rewrite.c>
+	Options +FollowSymlinks
+	RewriteEngine On
+ 
+	RewriteRule "(^|/)\." - [F]
+	
+	RewriteCond %{REQUEST_FILENAME} -s [OR]
+	RewriteCond %{REQUEST_FILENAME} -l [OR]
+	RewriteCond %{REQUEST_FILENAME} -d
+	RewriteRule ^.*$ - [NC,L]
+	RewriteRule ^.*$ neos.phar [NC,L]	
+</IfModule></code>
+<p><font color="#F00">Se não puder acessar o arquivo "neos.phar" externamente, troque a penúltima linha por:</font></p>
+
+<code>	RewriteRule ^.*$ index.php [NC,L]</code>
+
+<p>Esse arquivo fará o re-direcionamento de toda a requisição feita ao servidor que não corresponder a um arquivo real (existente) para o sistema do NEOS.</p>
 
 <h3>/app/.htaccess</h3>
 <b>Conteúdo:</b>
