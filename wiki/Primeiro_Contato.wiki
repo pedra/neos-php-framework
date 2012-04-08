@@ -77,17 +77,17 @@ class Controller_Inicial
 <h3>/app/view/home.html</h3>
 <b>Conteúdo:</b>
 <code><!DOCTYPE HTML>
-<html>
-    <head>
-    <meta charset="utf-8">
-    <title>Teste</title>
-    </head>
+<html> 
+<head> 
+<meta charset="utf-8"> 
+<title>Teste</title> 
+</head>
 
-    <body>
+<body>
 
-        <p><neos:mensagem /></p>
+    <p><neos:mensagem /></p>
 
-    </body>
+</body>
 </html></code>
 
 <p>Bem, esse é um arquivo html convencional (html5) exceto pela conteúdo  do parágrafo, do corpo do html:</p>
