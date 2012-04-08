@@ -65,4 +65,4 @@
     '<div>Meu nome é Paulo Rocha.</div>'
     
     ...</code>
-<p>Veja mais sobre as <strong>neosTags.</strong> Serão um forte aliado devido a sua portabilidade e produtividade, além de fornecer uma interface mais amigável entre o designer e programador com sua sintáxe mais próxima do html do que usar o PHP, diretamente.</p>
+<blockquote>Veja mais sobre as <strong>neosTags.</strong> Serão um forte aliado devido a sua portabilidade e produtividade, além de fornecer uma interface mais amigável entre o designer e programador com sua sintáxe mais próxima do html do que usar o PHP, diretamente.</blockquote>
