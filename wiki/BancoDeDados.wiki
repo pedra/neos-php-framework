@@ -1,5 +1,5 @@
 #labels DB,database,bancodedados,conector,connect,_db
-<g:plusone size="medium"></g:plusone>
+<g:plusone></g:plusone>
 <h1>Data Base</h1>
 <p>Como acessar os bancos de dados na versão 2.0 do NEOS.</p>
 
@@ -110,3 +110,5 @@ O retorno ($ret) pode ser de vários tipos, conforme o tipo da QUERY.
 
     //recuperando um arquivo armazenado no Oracle.
     $file = _db::get_file('SELECT M_ARQUIVO FROM TABELA WHERE ID=1');</code>
+
+<g:plusone></g:plusone>
