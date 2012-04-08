@@ -77,7 +77,8 @@ você pode criar outras pastas conforme a necessidade de sua aplicação
 </IfModule></code>
 <p><font color="#F00">Se não puder acessar o arquivo "neos.phar" externamente, troque a penúltima linha por:</font></p>
 
-<code>	RewriteRule ^.*$ index.php [NC,L]</code>
+<code>
+    RewriteRule ^.*$ index.php [NC,L]</code>
 
 <p>Esse arquivo fará o re-direcionamento de toda a requisição feita ao servidor que não corresponder a um arquivo real (existente) para o sistema do NEOS.</p>
 
