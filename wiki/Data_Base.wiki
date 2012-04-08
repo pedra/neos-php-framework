@@ -1,0 +1,114 @@
+#labels db,database,bancodedados
+<g:plusone size="small"></g:plusone>
+<h1>Data Base</h1>
+<p>Como acessar os bancos de dados na versão 2.0 do NEOS.</p>
+
+
+<h2>Introdução</h2>
+
+<p>A versão 2.0 do NEOS introduz conceitos de orientação a objeto oriundas das atualizações da versão 5.3.x do PHP, contribuindo para uma estruturação mais moderna do código do framework e sua aplicação (sites).</p>
+<p>Recomendamos o uso do PDO (PHP Data Object) por este ser nativo do próprio PHP e estar evoluindo constantemente junto a própria linguagem. Mas, por questão de compatibilidade com a versão anterior do NEOS, optamos por manter uma classe própria de acesso a banco de dados descrita aqui.</p>
+<p>Este sistema dispõe, atualmente, de drivers para Mysql, SqLite e Oracle e desempenha as funções mais básicas de SQL.</p>
+
+
+<h2>O Diretório DB</h2>
+
+<p>Abrindo o diretório DB (core/neos/db) podemos ver uma estrutura que se repete em outros diretórios do neos. Encontramos dois arquivos principais com os nomes de "abstract.php" e "interface.php". São, respectivamente, uma classe abstrata base e sua interface.
+O segundo arquivo neste diretório é o "conector.php": a própria classe "DB".</p>
+
+<h3>A classe Conector</h3>
+
+Todo o acesso a banco de dados no NEOS é feito por essa classe. Evidentemente um acesso da forma convencional, usando classes (PDO, Mysql,etc) e funções nativas da linguagem PHP pode ser usado, porém, padronizar o uso através desta classe pode ser muito mais vantajoso.
+
+A classe possui os seguintes métodos:
+
+<h4>connect</h4>
+
+<code>
+    sintaxe: object $objDriver = Neos\Db\Conector::connect([string $alias]);</code>
+
+Este método retorna um objeto "driver" que proporciona o acesso ao banco de dados indicado pelo 'alias' (argumento da função);
+Um 'alias' (ou apelido) pode ser definido nos arquivos de configuração (core/neos/config/database.php) como neste exemplo:
+
+<code>
+    $cfg->db->alias->driver = 'sqlite';
+    $cfg->db->alias->database = 'C:\caminho\arquivo_sqlite.db';</code>
+
+Onde 'alias' pode ser qualquer apelido para a conexão de banco de dados configurada e, neste caso, 'database' indica o parâmetro de conexão com o arquivo do sqlite.
+Existem outros parâmetros como: 'host', 'user', 'pass', 'charset', 'dsn'. 
+
+<h4>query</h4>
+
+<code>
+    sintaxe: mixed $ret = Neos\Db\Conector::query(string $sql [, String $alias]);</code>
+
+O método faz uma simples consulta no banco de dados especificado em $alias ou, na ausência deste parâmetro, no alias default.
+O retorno ($ret) pode ser de vários tipos, conforme o tipo da QUERY.
+
+<b>Exemplo (usando class_alias):</b>
+<code>
+    $ret = _db::query('SELECT * FROM TABELA');
+    if($ret){
+        foreach($ret as $key=>$val){
+            echo '<p>' . $key . ': ' . $val . '</p>';
+        }
+    }
+    else{
+        echo '<p>A consulta não retornou dados.</p>';
+    }</code>
+
+<h4>Insert</h4>
+<code>
+    sintaxe: bool $ret = Neos\Db\Conector::insert(array $campos, string $tabela [, String $alias]);</code>
+
+<p>O array '$campos' deve conter um par nome_do_campos => valor para cada campo (coluna) da linha que se deseja inserir no banco de dados.</p>
+<b>Exemplo:</b>
+<code>
+    $campos = array ( 'nome'       => 'Paulo',
+                      'sobre_nome' => 'R. B. Rocha',
+                      'status'     => 'ativo');
+
+    $ret = _db::insert($campos, 'cadastro');</code>
+
+<h4>Update</h4>
+<code>
+    sintaxe: bool $ret = Neos\Db\Conector::update(array $campos, string $where, string $tabela [, String $alias]);</code>
+
+<p>O array '$campos' funciona da mesma forma como no método insert.</p>
+<p>$where é uma string contendo a cláusula WHERE sql.</p>
+
+<b>Exemplo:</b>
+<code>
+    $campos = array ( 'nome'       => 'Paulo',
+                      'sobre_nome' => 'R. B. Rocha',
+                      'status'     => 'ativo');
+    $where = 'id = 3';
+
+    $ret = _db::update($campos, $where, 'cadastro');</code>
+
+<h4>get_file</h4>
+<font color="#F00">Somente implementado no driver <b>Oracle</b>.</font>
+
+<p>Está função recupera um arquivo armazenado como BLOB (ou CLOB) no Oracle.</p>
+
+<code>
+    sintaxe: mixed $ret = Neos\Db\Conector::get_file(string $sql, string $file, bool $download);</code>
+
+<p>Veja o que cada argumento significa:</p>
+<ul>
+    <li>$sql       = Um SELECT cujo resultado seja o campo onde o arquivo está armazenado;</li>
+    <li>$file      = nome e extensão que o arquivo receberá para download;</li>
+    <li>$download  = true/false -> força o download do arquivo ou (default/false) retorna o arquivo.</li>
+</ul>
+
+<p>O método retorna o arquivo armazenado no banco de dados ou força o download usando o helper 'download', finalizando nesse caso o script (ou framework).</p>
+
+<b>Exemplo:</b>
+<code>
+    //fazendo o download do arquivo "script_php.pdf".
+    _db::get_file('SELECT M_ARQUIVO FROM TABELA WHERE ID=1', 'script_php.pdf', true);
+
+    //recuperando um arquivo armazenado no Oracle.
+    $file = _db::get_file('SELECT M_ARQUIVO FROM TABELA WHERE ID=1');</code>
+
+<g:plusone size="small"></g:plusone>
