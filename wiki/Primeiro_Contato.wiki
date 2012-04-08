@@ -107,7 +107,7 @@ class Controller_Inicial
  
 <p>A função "index" é a função default do controller e contém duas instruções bem fáceis de entender.<p>
 <code>_view::val('mensagem', 'Hello World');</code>
-<p>Isto grava "Hello World" na variávelde views, de nome "mensagem".</p>
+<p>Isto grava "Hello World" na variável de nome "mensagem", disponível somente para as views.</p>
 
 <code>_view::set('home');</code>
 <p>A instrução acima chama uma view de nome "home" (/app/view/html/home.html).</p>
