@@ -49,8 +49,7 @@
 
 <code>sintaxe básica: '<neos:variável />'</code>
     
-    
-</p>
+
 <p>Onde "variável" deve ser substituída pelo nome da variável que se deseja mostrar neste local. Por exemplo, usando o exemplo mostrado anteriormente, para exibir o "nome" seria:</p>
 <code>
 	...
