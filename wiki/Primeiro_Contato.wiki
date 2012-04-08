@@ -89,7 +89,7 @@ class Controller_Inicial
 </body>
 </html></code>
 
-<p>Bem, esse é um arquivo html convencional (html5) exceto pela conteúdo  do parágrafo ('<p>') do corpo do html:</p>
+<p>Bem, esse é um arquivo html convencional (html5) exceto pela conteúdo  do parágrafo, do corpo do html:</p>
 
 <code><p><neos:mensagem /></p></code>
 
