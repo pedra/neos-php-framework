@@ -2,4 +2,13 @@
 <h1>Views</h1>
 
 <p>Esta é uma das partes mais interessantes do NEOS , pois, além de carregar as views na tela do browser, possui um 'template engine' simples, porém, muito poderoso.</p>
-<p>Esse template implementa as &copy;neosTags, um cache, além de um sistema modular, permitindo assim, futuras expansões e novas implementações.</p>
+<p>Esse template implementa as <b>neosTags</b>, um cache, além de um sistema modular, permitindo assim, futuras expansões e novas implementações.</p>
+<p>O sistema responsável pelo controle de views e templates 
+ é o <b>'DocFactory'</b> - literalmente traduzido como <i>'fabricante de documentos'</i> - e encontra-se em 'neos/doc/factory'.</p>
+
+
+
+
+<h2>Simples Views</h2>
+
+<p>Esta seção trata do uso mais comum 
