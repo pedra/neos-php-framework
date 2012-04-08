@@ -1,0 +1,5 @@
+#labels view,neostag,template
+<h1>Views</h1>
+
+<p>Esta é uma das partes mais interessantes do NEOS , pois, além de carregar as views na tela do browser, possui um 'template engine' simples, porém, muito poderoso.</p>
+<p>Esse template implementa as &copy;neosTags, um cache, além de um sistema modular, permitindo assim, futuras expansões e novas implementações.</p>
