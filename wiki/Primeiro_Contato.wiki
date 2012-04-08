@@ -1,0 +1,34 @@
+<h1>Primeiro Contato</h1>
+
+<p>Se você já usou outro framework não terá qualquer dúvida de como fazer o NEOS funcionar.</p>
+<p>Mas se esta é a sua primeira vez não fique apreensivo: será muito fácil instalar e começar a usar seu novo <strike>brinquedo</strike> framework.</p>
+
+<h2>Download</h2>
+<p>Pensando em um passo-a-passo bem completo, "pormenorizado", vamos começar fazendo o download do NEOS.</p>
+<p>Você deve escolher sempre a última versão e no formato PHAR. Caso sua intenção é estudar o framework (seus scripts, sua estrutura) e posteriormente até mesmo alterá-lo, então você deve baixar a versão SourceCode, zipada</p>
+
+<p>Veja neste <a href="http://code.google.com/p/neos-php-framework/downloads/list">link</a> as versões disponíveis e faça o download apropriado.</p>
+
+<h2>Servidor</h2>
+<p>Como pré-requisito você precisa:</p>
+<ul>
+<li>Servidor web Apache (de acesso público ou instalado em sua máquina de teste)</li>
+<li>O PHP na versão 5.3(+) instalado</li>
+</ul>
+
+<p>Para usar os arquivos PHAR diretamente chamados na url, você terá que incluir (se já não estiver) a seguinte linha no arquivo de configuração do Apache:</p>
+<code>AddType application/x-httpd-php .phar</code>
+
+<p>Se pretende criar arquivos PHAR em seu servidor terá que habilitar isso na configuração do PHP (php.ini), na seguinte linha:</p>
+<code>phar.readonly = Off</code>
+
+<p>Arquivos PHAR podem ser gravados com um "certificado" de segurança. Caso não precise disso modifique (ou insira) a seguinte linha em seu php.ini:</p>
+<code>phar.require_hash = Off</code>
+
+<p>Bem, agora é só salvar o arquivo "neos.phar" no root do seu servidor e checar se tudo está funcionando, digitando o seguinte em seu navegador:</p>
+<code>
+    http://localhost/neos.phar
+    //considerando "localhost" como o endereço de seu servidor</code>
+<p>Uma tela de "boas-vindas" deve ser mostrada em seu navegador.</p>
+
+<h2>Criando um Hello Word</h2>
