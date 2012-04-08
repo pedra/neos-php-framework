@@ -1,3 +1,4 @@
+<g:plusone size="small"></g:plusone>
 <h1>Primeiro Contato</h1>
 
 <p>Se você já usou outro framework não terá qualquer dúvida de como fazer o NEOS funcionar.</p>
@@ -139,3 +140,4 @@ class Controller_Inicial
 <code>http://localhost</code>
 <p>Considerando que "localhost" seja o endereço de nosso servidor!</p>
 <p>Se tudo estiver correto, a frase <b>"Hello World"</b> deve aparecer na tela do seu navegador.</p>
+<g:plusone size="small"></g:plusone>
