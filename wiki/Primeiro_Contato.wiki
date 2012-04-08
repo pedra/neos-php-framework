@@ -133,3 +133,9 @@ class Controller_Inicial
 <code><p><neos:mensagem /></p></code>
 
 <p>Aqui nós temos uma <b>neosTag</b> que mostrará o conteúdo da variável "mensagem", setada no controller.</p>
+
+<h3>Testando!</h3>
+<p>Agora, finalmente, podemos testar nossa primeira aplicação, digitando no navegar o seguinte:</p>
+<code>http://localhost</code>
+<p>Considerando que "localhost" seja o endereço de nosso servidor!</p>
+<p>Se tudo estiver correto, a frase <b>"Hello World"</b> deve aparecer na tela do seu navegador.</p>
