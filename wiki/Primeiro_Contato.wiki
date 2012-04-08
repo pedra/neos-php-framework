@@ -50,14 +50,14 @@ você pode criar outras pastas conforme a necessidade de sua aplicação
     ...etc</code>
 <p>Agora vamos ver qual o conteúdo de cada arquivo listado acima:</p>
 
-<h5>/app/.htaccess</h5>
+<h3>/app/.htaccess</h3>
 <b>Conteúdo:</b>
 <code>
     Deny From All</code>
 <p>Esse arquivo especial do servidor Apache está indicando ao servidor que nenhum acesso externo (usuário do site) será permitido nesta pasta.</p>
 <p>Isso porque esta pasta contém todos os arquivos de código (PHP) da nossa aplicação e portanto <b>não</b> deve ser "visto" por ninguém.</p>
 
-<h5>/app/controller/inicial.php</h5>
+<h3>/app/controller/inicial.php</h3>
 <b>Conteúdo:</b>
 <code><?php
 
@@ -71,3 +71,26 @@ class Controller_Inicial
 }</code>
 
 <p>Vamos ver linha por linha o que tudo isso significa;</p>
+
+
+<h3>/app/view/home.html</h3>
+<b>Conteúdo:</b>
+<code>'<!DOCTYPE HTML>'
+'<html>'
+'<head>'
+'<meta charset="utf-8">'
+'<title>Teste</title>'
+'</head>'
+
+'<body>'
+
+    '<p><neos:mensagem /></p>'
+
+'</body>'
+'</html>'</code>
+
+<p>Bem, esse é um arquivo html convencional (html5) exceto pela conteúdo  do parágrafo ('<p>') do corpo do html:</p>
+
+<code>'<p><neos:mensagem /></p>'</code>
+
+<p>Aqui nós temos uma <b>neosTag</b> que mostrará o conteúdo da variável "mensagem", setada no controller.</p>
