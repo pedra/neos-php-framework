@@ -63,18 +63,18 @@ você pode criar outras pastas conforme a necessidade de sua aplicação
 
 <h3>/.htaccess</h3>
 <b>Conteúdo:</b>
-<code>
-    <IfModule mod_rewrite.c>
-	Options +FollowSymlinks
-	RewriteEngine On
- 
-	RewriteRule "(^|/)\." - [F]
-	
-	RewriteCond %{REQUEST_FILENAME} -s [OR]
-	RewriteCond %{REQUEST_FILENAME} -l [OR]
-	RewriteCond %{REQUEST_FILENAME} -d
-	RewriteRule ^.*$ - [NC,L]
-	RewriteRule ^.*$ neos.phar [NC,L]	
+<code><IfModule mod_rewrite.c>
+    Options +FollowSymlinks
+    RewriteEngine On
+
+    RewriteRule "(^|/)\." - [F]
+
+    RewriteCond %{REQUEST_FILENAME} -s [OR]
+    RewriteCond %{REQUEST_FILENAME} -l [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^.*$ - [NC,L]
+
+    RewriteRule ^.*$ neos.phar [NC,L]
 </IfModule></code>
 <p><font color="#F00">Se não puder acessar o arquivo "neos.phar" externamente, troque a penúltima linha por:</font></p>
 
