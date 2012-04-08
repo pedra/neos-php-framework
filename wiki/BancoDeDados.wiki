@@ -96,7 +96,7 @@ O retorno ($ret) pode ser de vários tipos, conforme o tipo da QUERY.
 
 <p>Veja o que cada argumento significa:</p>
 <ul>
-    <li>$sql       = Um SELECT cujo resultado seja o campo onde o arquivo esteja armazenado;</li>
+    <li>$sql       = Um SELECT cujo resultado seja o campo onde o arquivo está armazenado;</li>
     <li>$file      = nome e extensão que o arquivo receberá para download;</li>
     <li>$download  = true/false -> força o download do arquivo ou (default/false) retorna o arquivo.</li>
 </ul>
