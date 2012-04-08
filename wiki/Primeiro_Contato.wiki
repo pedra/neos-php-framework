@@ -44,7 +44,7 @@ root --- pasta raiz do servidor Apache
     root/index.php //necessário somente se o servidor não reconhecer arquivos PHAR
     root/app/.htaccess
     root/app/controller/inicial.php
-    root/app/view/home.html
+    root/app/view/html/home.html
     root/app/model/
 
 você pode criar outras pastas conforme a necessidade de sua aplicação
@@ -102,10 +102,17 @@ class Controller_Inicial
     }
 }</code>
 
-<p>Vamos ver linha por linha o que tudo isso significa;</p>
+<p>Vamos ver linha por linha o que tudo isso significa.</p>
+<p>"Controller_Inicial" é o controlador default do NEOS. É representado por uma classe que "extends" o próprio framewrk - NEOS. Isso é interessante porque o controlador tem total controle sobre <b>todo</b> o funcionamento do sistema (veja [Controllers]).</p>
+ 
+<p>A função "index" é a função default do controller e contém duas instruções bem fáceis de entender.<p>
+<code>_view::val('mensagem', 'Hello World');</code>
+<p>Isto grava "Hello World" na variávelde views, de nome "mensagem".</p>
 
+<code>_view::set('home');</code>
+<p>A instrução acima chama uma view de nome "home" (/app/view/html/home.html).</p>
 
-<h3>/app/view/home.html</h3>
+<h3>/app/view/html/home.html</h3>
 <b>Conteúdo:</b>
 <code><!DOCTYPE HTML>
 <html> 
