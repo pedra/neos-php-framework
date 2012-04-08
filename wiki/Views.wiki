@@ -16,7 +16,7 @@
 <p>Na verdade a expressão correta seria: <i>"indicando a view ou views a serem processadas"</i>.</p>
 <p>O seguinte comando indica ao DocFactory qual view deve ser carregada e processada. Esse "carregamento" é feito em pilha, ou seja, mais de uma view pode ser carregada e será processada na sequência em que for declarada.</p>
 <code>
-    void _view::set(String nome_do_arquivo[, Array variaveis, String nome]);</code>
+    void _view::set(String nome_do_arquivo [, Array variaveis, String nome]);</code>
 
 <p>Onde:</p>
 <ul>
