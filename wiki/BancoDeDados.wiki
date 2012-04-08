@@ -1,52 +1,50 @@
 #labels DB,database,bancodedados,conector,connect,_db
 <g:plusone size="medium"></g:plusone>
-Como acessar os bancos de dados na versão 2.0 do NEOS
+<h1>Data Base</h1>
+<p>Como acessar os bancos de dados na versão 2.0 do NEOS.</p>
 
 
-= Introdução =
+<h2>Introdução</h2>
 
-A versão 2.0 do NEOS introduz conceitos de orientação a objeto oriundas das atualizações da versão 5.3.x do PHP, contribuindo para uma estruturação mais moderna do código do framework e sua aplicação (sites).
+<p>A versão 2.0 do NEOS introduz conceitos de orientação a objeto oriundas das atualizações da versão 5.3.x do PHP, contribuindo para uma estruturação mais moderna do código do framework e sua aplicação (sites).</p>
 
 
-= O Diretório DB =
+<h2>O Diretório DB</h2>
 
-Abrindo o diretório DB (core/neos/db) podemos ver uma estrutura que se repete em outros diretórios do neos. Encontramos dois arquivos principais com os nomes de "abstract.php" e "interface.php". São, respectivamente, uma classe abstrata base e sua interface.
-O segundo arquivo neste diretório e o "conector.php". A própria classe "DB".
+<p>Abrindo o diretório DB (core/neos/db) podemos ver uma estrutura que se repete em outros diretórios do neos. Encontramos dois arquivos principais com os nomes de "abstract.php" e "interface.php". São, respectivamente, uma classe abstrata base e sua interface.
+O segundo arquivo neste diretório e o "conector.php". A própria classe "DB".</p>
 
-== A classe Conector ==
+<h3>A classe Conector<h3>
 
 Todo o acesso a banco de dados no NEOS é feito por essa classe. Evidentemente um acesso da forma convencional, usando classes (PDO, Mysql,etc) e funções nativas da linguagem PHP pode ser usado, porém, padronizar o uso através desta classe pode ser muito mais vantajoso.
 
 A classe possui os seguintes métodos:
 
-=== connect ===
+<h4>connect</h4>
 
-{{{
-    sintaxe: object $objDriver = Neos\Db\Conector::connect([string $alias]);
-}}}
+<code>
+    sintaxe: object $objDriver = Neos\Db\Conector::connect([string $alias]);</code>
 
 Este método retorna um objeto "driver" que proporciona o acesso ao banco de dados indicado pelo 'alias' (argumento da função);
 Um 'alias' (ou apelido) pode ser definido nos arquivos de configuração (core/neos/config/database.php) como neste exemplo:
 
-{{{
+<code>
     $cfg->db->alias->driver = 'sqlite';
-    $cfg->db->alias->database = 'C:\caminho\arquivo_sqlite.db';
-}}}
+    $cfg->db->alias->database = 'C:\caminho\arquivo_sqlite.db';</code>
 
 Onde 'alias' pode ser qualquer apelido para a conexão de banco de dados configurada e, neste caso, 'database' indica o parâmetro de conexão com o arquivo do sqlite.
 Existem outros parâmetros como: 'host', 'user', 'pass', 'charset', 'dsn'. 
 
-=== query ===
+<h4>query</h4>
 
-{{{
-    sintaxe: mixed $ret = Neos\Db\Conector::query(string $sql [, String $alias]);
-}}}
+<code>
+    sintaxe: mixed $ret = Neos\Db\Conector::query(string $sql [, String $alias]);</code>
 
 O método faz uma simples consulta no banco de dados especificado em $alias ou, na ausência deste parâmetro, no alias default.
 O retorno ($ret) pode ser de vários tipos, conforme o tipo da QUERY.
 
 
-{{{
+<code>
     Exemplo (usando class_alias):
 
     $ret = _db::query('SELECT * FROM TABELA');
@@ -57,31 +55,27 @@ O retorno ($ret) pode ser de vários tipos, conforme o tipo da QUERY.
     }
     else{
         echo '<p>A consulta não retornou dados.</p>';
-    }
+    }</code>
 
-}}}
-
-<h3>Insert</h3>
+<h4>Insert</h4>
 <code>
-    sintaxe: mixed $ret = Neos\Db\Conector::insert(array $campos, string $tabela [, String $alias]);
-</code>
+    sintaxe: mixed $ret = Neos\Db\Conector::insert(array $campos, string $tabela [, String $alias]);</code>
 
-O array '$campos' deve conter um par nome_do_campos => valor para cada campo (coluna) da linha que se deseja inserir no banco de dados.
+<p>O array '$campos' deve conter um par nome_do_campos => valor para cada campo (coluna) da linha que se deseja inserir no banco de dados.</p>
 
 <code>Exemplo:
     $campos = array ( 'nome'       => 'Paulo',
                       'sobre_nome' => 'R. B. Rocha',
                       'status'     => 'ativo');
 
-    $ret = _db::insert($campos, 'cadastro');
-</code>
+    $ret = _db::insert($campos, 'cadastro');</code>
 
-<h3>Update</h3>
+<h4>Update</h4>
 <code>
-    sintaxe: mixed $ret = Neos\Db\Conector::update(array $campos, string $where, string $tabela [, String $alias]);
-</code>
+    sintaxe: mixed $ret = Neos\Db\Conector::update(array $campos, string $where, string $tabela [, String $alias]);</code>
 
-O array '$campos' deve conter um par nome_do_campos => valor para cada campo (coluna) da linha que se deseja inserir no banco de dados.
+<p>O array '$campos' funciona da mesma forma como no método insert.</p>
+<p>$where é uma string contendo a cláusula WHERE sql.</p>
 
 <code>Exemplo:
     $campos = array ( 'nome'       => 'Paulo',
@@ -89,5 +83,4 @@ O array '$campos' deve conter um par nome_do_campos => valor para cada campo (co
                       'status'     => 'ativo');
     $where = 'id = 3';
 
-    $ret = _db::insert($campos, $where, 'cadastro');
-</code>
+    $ret = _db::insert($campos, $where, 'cadastro');</code>
