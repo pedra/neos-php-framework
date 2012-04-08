@@ -111,4 +111,4 @@ O retorno ($ret) pode ser de vários tipos, conforme o tipo da QUERY.
     //recuperando um arquivo armazenado no Oracle.
     $file = _db::get_file('SELECT M_ARQUIVO FROM TABELA WHERE ID=1');</code>
 
-<g:plusone size="medium"></g:plusone>
+<g:plusone size="small"></g:plusone>
