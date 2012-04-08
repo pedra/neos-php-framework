@@ -39,7 +39,7 @@
 root --- pasta raiz do servidor Apache
 
     
-    root/neos.phar
+     root/neos.phar
     root/.htacess
     root/index.php //necessário somente se o servidor não reconhecer arquivos PHAR
     root/app/.htaccess
@@ -67,7 +67,7 @@ você pode criar outras pastas conforme a necessidade de sua aplicação
     Options +FollowSymlinks 
     RewriteEngine On 
 
-    RewriteRule "(^|/)\." - [F]  
+     RewriteRule "(^|/)\." - [F]  
     RewriteCond %{REQUEST_FILENAME} -s [OR] 
     RewriteCond %{REQUEST_FILENAME} -l [OR] 
     RewriteCond %{REQUEST_FILENAME} -d 
