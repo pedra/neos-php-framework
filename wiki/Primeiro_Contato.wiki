@@ -39,7 +39,7 @@
 root --- pasta raiz do servidor Apache
 
     
-     root/neos.phar
+    root/neos.phar
     root/.htacess
     root/index.php //necessário somente se o servidor não reconhecer arquivos PHAR
     root/app/.htaccess
