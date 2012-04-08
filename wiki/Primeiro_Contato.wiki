@@ -75,22 +75,22 @@ class Controller_Inicial
 
 <h3>/app/view/home.html</h3>
 <b>Conteúdo:</b>
-<code>'<!DOCTYPE HTML>'
-'<html>'
-'<head>'
-'<meta charset="utf-8">'
-'<title>Teste</title>'
-'</head>'
+<code><!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Teste</title>
+</head>
 
-'<body>'
+<body>
 
-    '<p><neos:mensagem /></p>'
+    <p><neos:mensagem /></p>
 
-'</body>'
-'</html>'</code>
+</body>
+</html></code>
 
 <p>Bem, esse é um arquivo html convencional (html5) exceto pela conteúdo  do parágrafo ('<p>') do corpo do html:</p>
 
-<code>'<p><neos:mensagem /></p>'</code>
+<code><p><neos:mensagem /></p></code>
 
 <p>Aqui nós temos uma <b>neosTag</b> que mostrará o conteúdo da variável "mensagem", setada no controller.</p>
