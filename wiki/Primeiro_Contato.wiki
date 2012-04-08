@@ -51,6 +51,13 @@ você pode criar outras pastas conforme a necessidade de sua aplicação
     ...etc</code>
 <p>Agora vamos ver qual o conteúdo de cada arquivo listado acima:</p>
 
+<h3>/index.php</h3>
+<p><font color="#F00">Este arquivo será necessário <b>somente</b> se você não conseguir fazer o servidor reconhecer os arquivos PHAR acessando-os diretamente pela url [acesso externo]</font></p>
+<b>Conteúdo:</b>
+<code><?php
+    include 'phar://neos.phar/main.php';
+    Main::run();</code>
+
 <h3>/app/.htaccess</h3>
 <b>Conteúdo:</b>
 <code>
