@@ -22,7 +22,7 @@
 <p>Se pretende criar arquivos PHAR em seu servidor terá que habilitar isso na configuração do PHP (php.ini), na seguinte linha:</p>
 <code>phar.readonly = Off</code>
 
-<p>Arquivos PHAR podem ser gravados com um "certificado" de segurança. Caso não precise disso modifique (ou insira) a seguinte linha em seu php.ini:</p>
+<p>Arquivos PHAR podem ser gravados com um "certificado" de segurança - um hash. Caso não precise disso, modifique (ou insira) a seguinte linha em seu php.ini:</p>
 <code>phar.require_hash = Off</code>
 
 <p>Bem, agora é só salvar o arquivo "neos.phar" no root do seu servidor e checar se tudo está funcionando, digitando o seguinte em seu navegador:</p>
