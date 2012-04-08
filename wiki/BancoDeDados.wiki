@@ -61,19 +61,33 @@ O retorno ($ret) pode ser de vários tipos, conforme o tipo da QUERY.
 
 }}}
 
-<h3>Insert</h3>_em construção_
+<h3>Insert</h3>
+<code>
+    sintaxe: mixed $ret = Neos\Db\Conector::insert(array $campos, string $tabela [, String $alias]);
+</code>
 
+O array '$campos' deve conter um par nome_do_campos => valor para cada campo (coluna) da linha que se deseja inserir no banco de dados.
 
-<h3>Update</h3>_em construção_
+<code>Exemplo:
+    $campos = array ( 'nome'       => 'Paulo',
+                      'sobre_nome' => 'R. B. Rocha',
+                      'status'     => 'ativo');
 
+    $ret = _db::insert($campos, 'cadastro');
+</code>
 
-<h3>Delete</h3>_em construção_
+<h3>Update</h3>
+<code>
+    sintaxe: mixed $ret = Neos\Db\Conector::update(array $campos, string $where, string $tabela [, String $alias]);
+</code>
 
+O array '$campos' deve conter um par nome_do_campos => valor para cada campo (coluna) da linha que se deseja inserir no banco de dados.
 
-<h3>Clear</h3>_em construção_
+<code>Exemplo:
+    $campos = array ( 'nome'       => 'Paulo',
+                      'sobre_nome' => 'R. B. Rocha',
+                      'status'     => 'ativo');
+    $where = 'id = 3';
 
-
-<h3>Create</h3>_em construção_
-
-
-<h2>PDO (PHP Data Object)</h2>_em construção_
+    $ret = _db::insert($campos, $where, 'cadastro');
+</code>
