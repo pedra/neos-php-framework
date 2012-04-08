@@ -83,11 +83,11 @@ class Controller_Inicial
 <title>Teste</title> 
 </head>
 
-<body>
+ <body>
 
     <p><neos:mensagem /></p>
 
-</body>
+ </body> 
 </html></code>
 
 <p>Bem, esse é um arquivo html convencional (html5) exceto pela conteúdo  do parágrafo, do corpo do html:</p>
