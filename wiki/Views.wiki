@@ -1,4 +1,5 @@
 #labels view,neostag,template
+<g:plusone size="small"></g:plusone>
 <h1>Views</h1>
 
 <p>Esta é uma das partes mais interessantes do NEOS , pois, além de carregar as views na tela do browser, possui um 'template engine' simples, porém, muito poderoso.</p>
@@ -65,3 +66,4 @@
     
     ...</code>
 <blockquote>Veja mais sobre as <strong>neosTags.</strong> Serão um forte aliado devido a sua portabilidade e produtividade, além de fornecer uma interface mais amigável entre o designer e programador com sua sintáxe mais próxima do html do que usar o PHP, diretamente.</blockquote>
+<g:plusone size="small"></g:plusone>
