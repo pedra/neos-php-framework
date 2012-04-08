@@ -31,4 +31,19 @@
     //considerando "localhost" como o endereço de seu servidor</code>
 <p>Uma tela de "boas-vindas" deve ser mostrada em seu navegador.</p>
 
-<h2>Criando um Hello Word</h2>
+<h2>Criando um "Hello World"</h2>
+<p>Vamos criar a estrutura básica (MVC) de uma aplicação com o NEOS.</p>
+<p>Crie a seguinte estrutura de pastas:</p>
+<code>
+root --- pasta raiz do servidor Apache
+    root/neos.phar
+    root/app/.htaccess
+    root/app/controller/inicial.php
+    root/app/view/home.html
+    root/app/model/
+
+você pode criar outras pasta conforme a necessidade de sua aplicação
+    root/css
+    root/js
+    root/image
+    ...etc</code>
