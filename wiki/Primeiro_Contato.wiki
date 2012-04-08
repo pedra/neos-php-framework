@@ -48,3 +48,26 @@ você pode criar outras pastas conforme a necessidade de sua aplicação
     root/js
     root/image
     ...etc</code>
+<p>Agora vamos ver qual o conteúdo de cada arquivo listado acima:</p>
+
+<h5>/app/.htaccess</h5>
+<b>Conteúdo:</b>
+<code>
+    Deny From All</code>
+<p>Esse arquivo especial do servidor Apache está indicando ao servidor que nenhum acesso externo (usuário do site) será permitido nesta pasta.</p>
+<p>Isso porque esta pasta contém todos os arquivos de código (PHP) da nossa aplicação e portanto <b>não</b> deve ser "visto" por ninguém.</p>
+
+<h5>/app/controller/inicial.php</h5>
+<b>Conteúdo:</b>
+<code><?php
+
+class Controller_Inicial
+    extends NEOS {
+		
+    function index() {
+        _view::val('mensagem', 'Hello World');		
+        _view::set('home');
+    }
+}</code>
+
+<p>Vamos ver linha por linha o que tudo isso significa;</p>
