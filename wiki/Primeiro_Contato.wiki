@@ -38,6 +38,7 @@
 root --- pasta raiz do servidor Apache
 
     root/neos.phar
+    root/index.php //necessário somente se o servidor não reconhecer arquivos PHAR
     root/app/.htaccess
     root/app/controller/inicial.php
     root/app/view/home.html
@@ -77,16 +78,16 @@ class Controller_Inicial
 <b>Conteúdo:</b>
 <code><!DOCTYPE HTML>
 <html>
-<head>
-<meta charset="utf-8">
-<title>Teste</title>
-</head>
+    <head>
+    <meta charset="utf-8">
+    <title>Teste</title>
+    </head>
 
-<body>
+    <body>
 
-    <p><neos:mensagem /></p>
+        <p><neos:mensagem /></p>
 
-</body>
+    </body>
 </html></code>
 
 <p>Bem, esse é um arquivo html convencional (html5) exceto pela conteúdo  do parágrafo, do corpo do html:</p>
