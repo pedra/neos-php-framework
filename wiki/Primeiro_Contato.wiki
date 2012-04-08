@@ -33,16 +33,17 @@
 
 <h2>Criando um "Hello World"</h2>
 <p>Vamos criar a estrutura básica (MVC) de uma aplicação com o NEOS.</p>
-<p>Crie a seguinte estrutura de pastas:</p>
+<p>Crie a seguinte estrutura de pastas e arquivos:</p>
 <code>
 root --- pasta raiz do servidor Apache
+
     root/neos.phar
     root/app/.htaccess
     root/app/controller/inicial.php
     root/app/view/home.html
     root/app/model/
 
-você pode criar outras pasta conforme a necessidade de sua aplicação
+você pode criar outras pastas conforme a necessidade de sua aplicação
     root/css
     root/js
     root/image
