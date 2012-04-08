@@ -106,4 +106,8 @@ O retorno ($ret) pode ser de vários tipos, conforme o tipo da QUERY.
 <b>Exemplo:</b>
 <code>
     //fazendo o download do arquivo "script_php.pdf".
-    _db::get_file('SELECT M_ARQUIVO FROM TABELA WHERE ID=1', 'script_php.pdf', true);</code>
+    _db::get_file('SELECT M_ARQUIVO FROM TABELA WHERE ID=1', 'script_php.pdf', true);
+
+    //recuperando um arquivo armazenado no Oracle:
+    $file = _db::get_file('SELECT M_ARQUIVO FROM TABELA WHERE ID=1');
+</code>
