@@ -2,7 +2,7 @@
 /** 
  * Driver para PDO.
  * @copyright	NEOS PHP Framework - http://neosphp.org
- * @license		http://neosphp.org/license 
+ * @license		http://neosphp.org/license Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
  * @author		Paulo R. B. Rocha - prbr@ymail.com 
  * @version		CAN : B4BC
  * @package		Neos\Db
@@ -117,5 +117,5 @@ class Driver_PDO
 	function execute($nome = 'sql'){}
 	
 	//Não implementado
-	function get_file($sql, $file , $download){ return false;}
+	function get_file($sql, $file , $force){}
 }

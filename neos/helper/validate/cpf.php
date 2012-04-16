@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright	NEOS PHP Framework - http://neosphp.org
- * @license		http://neosphp.org/license 
+ * @license		http://neosphp.org/license Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
  * @author		Paulo R. B. Rocha - prbr@ymail.com
  * @package		Neos\Helper
  * @subpackage	Validate

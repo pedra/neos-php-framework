@@ -2,7 +2,7 @@
 /** 
  * MimesTypes 
  * @copyright	NEOS PHP Framework - http://neosphp.org
- * @license		http://neosphp.org/license 
+ * @license		http://neosphp.org/license Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
  * @version		CAN : B4BC
  * @package		Neos\Config
  
@@ -83,7 +83,6 @@ array(
 	'wav'	=>	'audio/x-wav',
 	'bmp'	=>	'image/bmp',
 	'gif'	=>	'image/gif',
-	'ico'	=>	'image/ico',
 	'jpeg'	=>	array('image/jpeg', 'image/pjpeg'),
 	'jpg'	=>	array('image/jpeg', 'image/pjpeg'),
 	'jpe'	=>	array('image/jpeg', 'image/pjpeg'),

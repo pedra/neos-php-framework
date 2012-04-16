@@ -1,10 +1,11 @@
 <?php
+
 //TODO: PASSAR o conteudo do '__construct' para a função 'mount' ou criar sub-funções para isso
 
 /**SuperClasse Main.
  *
  * @copyright	NEOS PHP Framework - http://neosphp.org
- * @license		http://neosphp.org/license 
+ * @license		http://neosphp.org/license Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
  * @author		Paulo R. B. Rocha - prbr@ymail.com
  * @version		CAN : B4BC
  * @package		Neos\Main
@@ -26,8 +27,7 @@ class Main {
 
 	/** Referencia Singleton!
 	 */
-	public static $THIS = null;
-	//static $THIS = array();
+	static $THIS = array();
 	
 	/** Url decodificada (sem a sub_uri e outros ruídos)
 	 */
@@ -57,15 +57,15 @@ class Main {
 		if(version_compare(PHP_VERSION, '5.3') < 0) exit('Não há suporte para a versão ' . PHP_VERSION . ' do PHP!');
 
 		//Versão do Framework
-		define('NEOS_CAN', 'C4GE');
+		define('NEOS_CAN', 'B5OM');
 		header('X-Powered-By: NEOS PHP Framework / ' . NEOS_CAN);
 
 		//Definindo o PATH principal
 		define('DS', DIRECTORY_SEPARATOR);
-		define('PATH_NEOS', dirname(__FILE__));
+		define('PATH_NEOS', dirname(__FILE__) . DS);
 		//Estes podem ser pré-definidos no arquivo 'index.php'
-		defined('PATH') || define('PATH', realpath(str_replace('phar://','', dirname(__DIR__)))); 
-		defined('PATH_APP') || define('PATH_APP', realpath(PATH . '/app'));
+		defined('PATH') || define('PATH', realpath(dirname(__FILE__) . '/../') . DS);
+		defined('PATH_APP') || define('PATH_APP', realpath(PATH . 'app') . DS);
 
 		//Evitando a produção de cache no navegador
 		header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
@@ -76,60 +76,33 @@ class Main {
 
 		//Charset - garantia de compatibilidade com várias linguagens/browsers...
 		header('Content-type: text/html; charset=utf-8');
-		
-		//setando o include_path
-		$incpath = trim(get_include_path(), '.');
-		$incpath = explode(PATH_SEPARATOR, $incpath);
-		array_shift($incpath);		
-		set_include_path(implode(PATH_SEPARATOR, array_merge(array(PATH_APP, str_replace('phar:', 'phar|',PATH_NEOS)), $incpath)));
 
-		//setando a classe de carregamento automático
-		if(!function_exists('spl_autoload_register')) exit("spl_autoload não foi instalado neste sistema (PHP)");
-		spl_autoload_register( function ($class){ 		
-									$class = DS . strtolower(trim(strtr($class, '_\\', DS . DS), DS . '/ '));
-									$pth = explode(PATH_SEPARATOR, get_include_path());
-									
-									foreach($pth as $f){ 
-										$f = str_replace('phar|', 'phar:', $f);
-										//echo '<br>' . $f . $class . '.php || ' . get_include_path();
-										//file_put_contents(PATH . DS . 'logs.txt', $f . $class . NEOS_STATE . ".php \n", FILE_APPEND);
-										if(file_exists($f . $class . NEOS_STATE . '.php')) return require $f . $class . NEOS_STATE . '.php';
-										if(file_exists($f . $class . '.php')) return require $f . $class . '.php';
-									}
-								});
-								
-		//-------- CONFIGURAÇÂO
-		Neos\Config\Cfg::this();
-		
-		//incluindo as funções de compatibilidade com as versões antigas
-		include (PATH_NEOS . '/neos/helper/functions.php'); //funçoes globais do núcleo
-		
-		//-------- ERROS
-		//modificando a tela de exibição de erros do PHP
-		if(function_exists('ini_set')){
-			ini_set('error_prepend_string', file_get_contents(PATH_NEOS . '/neos/error/head.html') . '<p>');
-			ini_set('error_append_string', '</p>' . file_get_contents(PATH_NEOS . '/neos/error/footer.html'));
-		}
+		//Alguns includes extremamente necessários
+		include (PATH_NEOS . 'neos/config' . DS . 'cfg.php'); //classe config
+		include_once (PATH_NEOS . 'neos/helper/functions.php'); //funçoes globais do núcleo
 
-		//Setando a classe de tratamento de erros		
-		set_error_handler('\Neos\Error\Error::error');
-		set_exception_handler('\Neos\Error\Error::exception');
-		
-		//Alias para algumas classes
-		class_alias('Neos\Config\Cfg', '_cfg');		
+		//Alias para as classes BASE
+		class_alias('Neos\Config\Cfg', '_cfg');
 		class_alias('Main', '_neos');		
+
+		//Carregando imediatamente as configurações
+		_cfg::this();
+
+		//Alias para algumas outras classes
 		class_alias('Neos\Base', 'NEOS');
 		class_alias('Neos\Doc\Factory', '_docFactory');
 		class_alias('Neos\Doc\Factory', '_view');
 		class_alias('Neos\Db\Conector', '_db');
 	}
-	
+
 	/* Construtor singleton da própria classe.
 	 * Acessa o método estático para criar uma instância da classe automáticamente.
 	 * @return 'this' instance
 	*/
 	final public static function this(){
-		return (!isset(static::$THIS)) ? static::$THIS = new static : static::$THIS;
+		$name = get_called_class();
+		if (!isset(static::$THIS[$name])) static::$THIS[$name] = new static;
+		return static::$THIS[$name];
 	}
 
 	/**
@@ -166,42 +139,36 @@ class Main {
 	/**
 	 * Montagem da aplicação
 	 */
-	final static function run($state = '', $subUri = ''){
-		$main = self::mount($state, $subUri)
-				->control();
-		//CORESERVICE
-		if(isset(_cfg::get()->args[0]) && _cfg::get()->args[0] == _cfg::get()->admin_url) {
-			include 'phar://' . PATH . '/neos.phar/help/core.php'; 
-			exit();	
-		}
-		$main->produce()
-				->dismount();
+	final static function run($state = 'production', $subUri = ''){
+		self::mount($state, $subUri)
+			->control()
+			->produce()
+			->dismount();
 	}
 
 	/**
 	 * Montagem da aplicação
 	 */
-	final static function mount($state = '', $subUri = ''){
+	final static function mount($state = 'production', $subUri = ''){
 
-		//Estado da Aplicação (test/production)
-		if($state == '') $state = self::$arrayStates[0];
+		//Estado da Aplicação (text/production)
 		self::$varState = (in_array($state, self::$arrayStates)) 
-							? '_' . $state 
-							: '';
+							? $state 
+							: 'production';
 		self::$varIndex = (self::$varState != self::$arrayStates[0]) 
-							? trim(basename($_SERVER['SCRIPT_FILENAME']), '/ ') 
+							? trim($_SERVER['SCRIPT_NAME'], '/') 
 							: '';
-		define('NEOS_STATE', self::$varState); 
+		define('NEOS_STATE', self::$varState);
 
 		//evitando uma sobremontagem
-		if(defined('URL_PRE')) return false;  	
+		if(defined('URL_PRE')) return false;
 
 		//resolve a URL
-		self::this()->varSubUri = trim($subUri, '/\\ ');
+		self::this()->varSubUri = $subUri;
 		self::this()->varUrl = trim(str_replace($subUri, '', $_SERVER['REQUEST_URI']), '/ ');
 		
 		//gravando na configuração do sistema
-		_cfg::get()->args = trim(urldecode(str_replace(array(self::this()->varSubUri,basename($_SERVER['SCRIPT_FILENAME'])), '', self::this()->varUrl)), '/');		
+		_cfg::get()->args = trim(urldecode(str_replace(self::this()->varSubUri, '', self::this()->varUrl)), '/');		
 		_cfg::get()->uri = self::this()->varUrl;
 
 		//start buffer e callback de saída
@@ -210,13 +177,15 @@ class Main {
 		//define as constantes URLs
 		define('URL_PRE', 'http' . (self::_detectSSL() ? 's' : '') . '://');
 		define('URL_DOM', $_SERVER['HTTP_HOST']);
-		define('URL_BASE', URL_DOM . '/' . ((self::this()->varSubUri != '') ? self::this()->varSubUri . '/' :  ''));
+		define('URL_BASE', URL_DOM.'/'.self::this()->varSubUri);
 		define('URL', URL_PRE . URL_BASE);
 		define('URL_SEG', _cfg::get()->args);
-		$url_link = (self::$varState != self::$arrayStates[0]) ? '' : self::$varIndex . '/';
+		$url_link = (self::$varIndex == '') 
+					? '' 
+					: self::$varIndex. '/';
 
 		define('URL_LINK', URL . $url_link);
-		
+
 		//igualando os valores de url para a aplicação
 		self::this()->varVars['URL']		= URL;
 		self::this()->varVars['URL_LINK']	= URL_LINK;
@@ -238,6 +207,7 @@ class Main {
 	 * @return array $array
 	*/
 	private function decodUrl(){
+		//explode a url
 		$varUri = explode('/', _cfg::get()->args);
 
 		//GET
@@ -303,8 +273,8 @@ class Main {
 		}
 	}
 
-	final public function control(){
-		 
+	final public function control(){ 
+
 		//Definindo o controller
 		if (file_exists(APP_CONTROLLER . strtolower(_cfg::get()->args[0]) . EXTCTRL)) {
 			_cfg::get()->ctrl = ucfirst(trim(_cfg::get()->args[0]));
@@ -313,7 +283,6 @@ class Main {
 			_cfg::get()->ctrl = ucfirst(_cfg::get()->error_route);
 			unset(_cfg::get()->args[0]);
 		}
-		
 		if (!file_exists(APP_CONTROLLER . strtolower(_cfg::get()->ctrl) . EXTCTRL)) {
 			_cfg::get()->error['cod'] = 1;
 			trigger_error('Controller "' . _cfg::get()->ctrl . '" n&atilde;o encontrado.');
@@ -326,22 +295,21 @@ class Main {
 				unset(_cfg::get()->args[1]);
 			}
 		} else $func = _cfg::get()->func;
-		
 
 		//Cache
 		if (isset(_cfg::get()->cache_time) && _cfg::get()->cache_time > 0) Library\Cache::start($func);
 
 		//Chamando o controller/função
-		$ctrl = 'Controller_' . ucfirst(_cfg::get()->ctrl);
-		
-		//Monta o Controller (carrega com o autoload)
+		$ctrl = 'Controller_' . _cfg::get()->ctrl;
+
+		//_cfg::get()->args = &_cfg::get()->args;
 		if (method_exists($ctrl, $func)) {
 			if (isset(_cfg::get()->args[1]) && $func == _cfg::get()->args[1]) {
 				unset(_cfg::get()->args[1]);
 				_cfg::get()->func = $func;
 			}
 			call_user_func_array(array($ctrl::this(), _cfg::get()->func), _cfg::get()->args);
-		} else {			
+		} else {
 			call_user_func_array(array($ctrl::this(), _cfg::get()->func), _cfg::get()->args);
 		}
 

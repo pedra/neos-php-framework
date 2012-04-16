@@ -3,7 +3,7 @@ namespace Neos\Doc;
 /** 
 	* Template para manipulação de documentos HTML.
 	* @copyright	NEOS PHP Framework - http://neosphp.org
-	* @license		http://neosphp.org/license 
+	* @license		http://neosphp.org/license Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
 	* @author		Paulo R. B. Rocha - prbr@ymail.com 
 	* @version		CAN : B4BC
 	* @package		Neos\Doc
@@ -13,7 +13,7 @@ namespace Neos\Doc;
 */
 
 class Layout
-	extends Type\Html {
+	extends Html {
 	
 	/**
 	* Layout padrão usado para a renderização
@@ -116,7 +116,7 @@ class Layout
 			
 		//Caso o arquivo não exista...	
 		} else {
-			trigger_error('Não encontrei o arquivo de layout!' . _pt($this) . PATH_TEMPLATE . $this->layout . '.html');
+			trigger_error('Não encontrei o arquivo de layout!');
 			return;
 		}
 	}

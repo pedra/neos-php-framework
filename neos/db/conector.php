@@ -3,7 +3,7 @@
  * Objeto para a Modelagem de dados.
  * Base para a transação de fontes de dados diversas (banco de dados, xml. arquivos 'ini', etc). 
  * @copyright	NEOS PHP Framework - http://neosphp.org
- * @license		http://neosphp.org/license 
+ * @license		http://neosphp.org/license Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
  * @author		Paulo R. B. Rocha - prbr@ymail.com 
  * @version		CAN : B4BC
  * @package		Neos\Db
@@ -133,30 +133,5 @@ class Conector
 	static function create($fields = array(), $table, $alias = ''){
 		return self::this()->connect($alias)->create($table,$fields);		
 	}
-	
-	
-	static function getErro($alias = ''){
-		return self::this()->connect($alias)->getErro();
-	}
-	
-	
-	/**
-	* GET_FILE - SOMENTE ORACLE
-	* Recupera um arquivo armazenado como BLOB (ou CLOB) no Oracle
-	*
-	* @param string $sql		Um SELECT cujo resultado seja o campo onde o arquivo esteja armazenado;
-	* @param string	$file		Nome e extensão que o arquivo receberá para download;
-	* @param bool $download		True/false -> força o download do arquivo / retorna o arquivo.
-	*
-	* @return mixed				O próprio ar quivo ou será forçado o download do arquivo automaticamente (force=true).
-	*
-	* @example					
-	*	//fazendo o download do arquivo "script_php.pdf".
-    *	_db::get_file('SELECT M_ARQUIVO FROM TABELA WHERE ID=1', 'script_php.pdf', true);
-	*/
-	static function get_file($sql, $file, $download = false){
-		return self::this()->connect($alias)->get_file($sql, $file, $download);
-	}
-
 	
 }

@@ -4,7 +4,7 @@
  * Gerencimento de Usuário.
  * Também pode ser entendido como gerenciamento de acesso ao site. Representa/retorna os parâmetros do browser (ou robot) usado para acessar o site.
  * @copyright	NEOS PHP Framework - http://neosphp.org
- * @license		http://neosphp.org/license 
+ * @license		http://neosphp.org/license Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
  * @author		Paulo R. B. Rocha - prbr@ymail.com
  * @version		CAN : B4BC
  * @package		Neos\Library
@@ -16,7 +16,7 @@
 /* 	USER OBJECT
   Esta classe implementa um objeto USER que contem as definições do usuário do site/aplicação corrente.
   Para a preservação dos dados entre sessões se fáz necessário o uso de um banco de dados escolhido pelo desenvolvedor ou um bd em Sqlite.
-  As configurações para o USER estão no arquivo '/neos/config/geral.php'.
+  As configurações para o USER estão no arquivo '...core/Config/config.php'.
   Os seguintes parâmetros podem ser configurados: identificação, autenticação, permissão, rastro (logs), ciclo vital, categoria, bagagens, etc.
 
   PARA USAR
@@ -39,19 +39,19 @@
   $cfg->user->db 			= 'db_alias';
   $cfg->user->table 		= 'USUARIO';
   $cfg->user->col_id		= 'USER_IDKEY';
-  $cfg->user->col_login		= 'USER_LOGIN';
-  $cfg->user->col_pass		= 'USER_PASS';
-  $cfg->user->col_life		= 'USER_LIFETIME';
+  $cfg->user->col_login	= 'USER_LOGIN';
+  $cfg->user->col_pass	= 'USER_PASS';
+  $cfg->user->col_life	= 'USER_LIFETIME';
   $cfg->user->col_active	= 'USER_ACTIVE';
 
   Além dos parâmetros acima temos:
 
-  $cfg->user->load		= false;	//carregamento automático da classe (opcional)
-  $cfg->user->life		= 18000;	//tempo de vida da sessão do usuário (em segundos)
-  $cfg->user->use_db	= true;		//para melhorar a performance você pode trabalhar somente com os dados da sessão (use_db=false). Neste caso, se houver alguma alteração dos dados do usuário por outro processo, a atualização será feita somente no próximo login...
+  $cfg->user->load	= false;		//carregamento automático da classe (opcional)
+  $cfg->user->life	= 18000;		//tempo de vida da sessão do usuário (em segundos)
+  $cfg->user->use_db	= true;			//para melhorar a performance você pode trabalhar somente com os dados da sessão (use_db=false). Neste caso, se houver alguma alteração dos dados do usuário por outro processo, a atualização será feita somente no próximo login...
 
   PARA CHAMAR
-  Use a função '_user()' do helper 'functions' para acessar as funções e parâmetros desta classe.
+  Use a função '_user()' do CORE para acessar as funções e parâmetros desta classe.
   Ex.: if(_user()->login){echo 'Você está logado no sistema';}
   Ex.: if(_user()->login){echo 'Olá, '._user()->getDb('USER_NOME').'!<br/>Você está logado no sistema.';}
 
@@ -112,17 +112,25 @@ class User
         $login = strtoupper($this->_escape($login));
         $senha = md5($senha);
         //escolhendo os campos de login e senha
-        $col_login = ($clogin != '') ? $clogin : $this->col_login;		
-        $col_pass = ($csenha != '') ? $csenha : $this->col_pass;
+        if ($clogin != '') {$col_login = $clogin;}
+		else {$col_login = $this->col_login;}
+		
+        if ($csenha != '') {$col_pass = $csenha;}
+		else {$col_pass = $this->col_pass;}
 		
         //força um login sem senha
-		$wsenha = ($force) ? '' : 'AND ' . $col_pass . '="' . $senha . '"';
+        if ($force) {$wsenha = '';}
+		else {$wsenha = 'AND ' . $col_pass . '="' . $senha . '"';}
 		
         //buscando no BD
         $q = _db($this->db)->query('SELECT * FROM ' . $this->table . '
 									WHERE UPPER(' . $col_login . ')="' . $login . '"
 									' . $wsenha . '
 									AND ' . $this->col_active . '="S"');
+		/*exit('SELECT * FROM ' . $this->table . '
+									WHERE UPPER(' . $col_login . ')="' . $login . '"
+									' . $wsenha . '
+									AND ' . $this->col_active . '="S"');*/
         if ($q) {
             //carregando TODOS os dados para acesso rápido
             foreach ($q[0] as $k => $v) {
@@ -149,8 +157,10 @@ class User
 	*/
     function fastLogin($login='', $len=3) {
         $login = strtoupper(trim($login));
-        if ($login == '') return false;
-		$len = 0 + $len;
+        if ($login == '') {
+            return false;
+        }
+        $len = 0 + $len;
         $log = substr($login, 0, $len);
         $log = _lib('Can')->decodCan($log, $len) - 360;
         $senha = substr($login, $len);
@@ -262,7 +272,7 @@ class User
 
     function _includeAgent() {
         if (!isset($this->_user_agents)) {
-            $this->_user_agents = include (PATH_NEOS . '/neos/config/user_agents.php');
+            $this->_user_agents = include (PATH_NEOS . 'Config/user_agents.php');
         }
     }
 
@@ -270,23 +280,9 @@ class User
         if ($in == '') $in = 'HTTP_USER_AGENT';
 		if (isset($_SERVER[$in])) {
             $this->_includeAgent();
-			$uag = $_SERVER[$in];
-			$ver = '';
             foreach ($this->_user_agents[$type] as $k => $v) {
-				$t = strpos(strtoupper($uag), strtoupper($k));
-                if ($t !== false) {
-					if($type == 'browsers'){
-						$t += strlen($k);
-						if($uag[$t] == '/' || $uag[$t] == ' '){ 
-							for($i = $t +1; $i < strlen($uag) ; $i++){
-								if($uag[$i] == ' ' || $uag == '/') break;
-								$ver .= $uag[$i];							
-							}
-						}
-						$b['browser'] = $v;
-						$b['version'] = $ver;
-						return $b;
-					} else { return $v;}
+                if (strpos(strtoupper($_SERVER[$in]), strtoupper($k)) !== false) {
+                    return $v;
                     break;
                 }
             }

@@ -3,7 +3,7 @@ namespace Neos\Doc;
 /**
  * Sub-framework para a Renderização de saída
  * @copyright	NEOS PHP Framework - http://neosphp.org
- * @license		http://neosphp.org/license 
+ * @license		http://neosphp.org/license Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
  * @author		Paulo R. B. Rocha - prbr@ymail.com
  * @version		CAN : B4BC
  * @package		Neos\Doc
@@ -103,7 +103,7 @@ class Factory
 		
 		//pegando os PATHs para JavaScript
 		$this->varPathJs = \_cfg::this()->varConfig->pathJs;
-		$this->varUrlJs = \_cfg::this()->varConfig->urlJs;
+		$this->varUrlJs = \_cfg::this()->varConfig->urlJs;	
 	}
 
 
@@ -159,8 +159,8 @@ class Factory
 	 * @param $v valor a ser mostrado (string)
 	 * @return void
 	*/
-	static function push($t, $v){
-		self::this()->varPush[][$t]=_pt($v,false);
+	static function push($v){
+		self::this()->varPush[]=_pt($v,false);
 	}
 
 	/**
@@ -177,29 +177,63 @@ class Factory
 	 *
 	 * @return void
 	*/
-	function produce($content = ''){
-		
-		//limpando o buffer...
-		if(_cfg()->out_restricted) ob_clean();		
+	function produce($content = ''){		
 		
 		if (_cfg()->template != '') {
 		//Se deve usar um template...
 			if (file_exists(_cfg()->template_path . _cfg()->template . DS . 'engine' . DS . 'template.php')) {
-				include _cfg()->template_path . _cfg()->template . DS . 'engine' . DS . 'template.php';
+				include _cfg()->template_path . _cfg()->template . DS . 'engine' . DS . 'template.php';				
 				$this->objRender = Template::this();
 			//Caso não for encontrada a classe de template na pasta do template, usa a classe Layout. 
 			} else { $this->objRender = Layout::this(); }
 			
 			$this->objRender->process();
 		//se não usar template chama a classe de processamento de views normal
-		} else {		
-			$this->objRender = Type\Html::this();
-			$this->objRender->produce();
-		}	
-		return \_neos::this();
+		} else {
 		
+			$this->objRender = Html::this();
+			$this->objRender->produce();
+		}
+		
+		return \_neos::this();
 	}
-	
+
+
+	/**
+	* Gera a barra de status
+	* TODO : Criar o carregamento e compressão de arquivos CSS/JS para incluir os da barra de status.
+	*
+	* @return string Html para a barra de status
+	*/
+
+	function statusBar($extended = false){
+		$sb = '<style>#neos_status{margin:0;padding:20px;position:fixed;bottom:0;right:-430px;top:0;z-index:2;font-size:10px;color:#000;background:#DEEFEF;border-left:1px solid #DDD;cursor:pointer;width:400px;overflow:auto}#neos_status *{cursor:default;font-size:10px}#neos_status h5,#neos_status h6{color:#000;font-weight:bold;padding:0;margin:0;text-shadow:none}#neos_status h5{font-size:28px;color:#FFF}#neos_status h6{font-size:16px;text-shadow:2px 2px 3px #AAA;}#neos_status p{font-family:"Lucida Console",Monaco,monospace,"Courier New",Courier,Verdana,Arial;padding:0}#neos_status ul{padding:5px 0 0 0}#neos_status ul li{text-align:left;list-style:none}#neos_status ul li span{float:right;}</style><script>$(document).ready(function(){$("#neos_status").animate({opacity:0.5},0).mouseenter(function(){if($(this).css("right")=="-430px"){$(this).animate({right:0,opacity:1},400)}});$("#neos_status").mouseleave(function(){$(this).animate({right:"-430px",opacity:0.2},400)})})</script><div id="neos_status"><h5>NEOS PHP Framework</h5><h5>modo: "'.NEOS_STATE.'"</h5><p><b>Mem.: '.round((memory_get_usage()/1000), 0).' Kb | Peak: '.round((memory_get_peak_usage()/1000), 0).' Kb | Time: '.number_format((microtime(true) - NEOS_INIT_TIME)*1000,3,',','.').' ms</b></p>';
+		if(!$extended) :
+			//mostrando os arquivos incluídos
+			$ct = 0;
+			$cf = 0;
+			$sb .= '<h6>Arquivos incluídos</h6><ul>';
+			foreach(get_included_files() as $f):
+				$fz = filesize($f);
+				$sb .= "\n".'<li>'.$f.'<span>'.number_format($fz/1000,3,',','.').' Kb.</span></li>';
+				$ct += $fz;
+				$cf++;
+			endforeach;
+			$sb .= '<li><b>Total ('.$cf.' Files )<span>'.number_format($ct/1000,3,',','.').' Kb.</span></b></li></ul>';
+
+			//mostrando os ítens do "push"
+			if(count($this->varPush) > 0):
+				$sb .= '<h6>Logs</h6><ul>';
+				foreach($this->varPush as $p):
+					$sb .= '<li>'.$p.'</li>';
+				endforeach;
+				$sb .= '</ul>';
+			endif;
+		endif;
+
+		return $sb . '</div>';
+	}
+
 	/**
 	 * Função (callback) de finalização do boofer de saida do framework
 	 * Disparado automaticamente na finalização de todos os scripts
@@ -211,78 +245,28 @@ class Factory
 	*/
 	function outBuffer($out,$md){
 		//evitando exibição de erros da classe de Erros
-		restore_error_handler();	
+		restore_error_handler(); 		
 
 		//retorna somente o conteudo do buffer - descarta tudo mais
 		if(!$this->varBuffer == '') return $this->varBuffer;
 
 		//retorna o conteudo (out) - não processa o restante desta função!
-		if(!$this->varBufferOn) return $out;	
+		if(!$this->varBufferOn) return $out;
 
         //Adicionando os links de CSS/JavaScript no HEAD
-		$app = _app();
-		$head = '<script type="text/javascript">';
-		foreach($app as $k=>$v){
-			$head .= 'var neos_' . $k . '="' . $v . '";';   	
-		}
-        $head .= '</script>';
-		$head .= (!empty($this->varCss)) ? $this->_addLinkCss() : '';
+		$head = (!empty($this->varCss)) ? $this->_addLinkCss() : '';
 		$head .= (!empty($this->varJs['h'])) ? $this->_addLinkJsHead() : '';		
-			
 		$out = str_replace('</head>', $head . "\n</head>", $out);
 
 		//Adicionando a barra de status e links de Javascript antes do BODY
-		$body = (!empty($this->varJs['b'])) ? $this->_addLinkJsBody() : '';
-		$body .= (strpos(_cfg('status'),'display') !== false) ? $this->statusBar((strpos(_cfg('status'),'extended') !== false) ? true : false) : '';		
-		
+		$body = (strpos(_cfg('status'),'display') !== false) ? $this->statusBar() : '';
+		$body .= (!empty($this->varJs['b'])) ? $this->_addLinkJsBody() : '';
 		if($body != '') $out = str_replace('</body>', $body . "\n</body>", $out);
 
 		//Comprimindo se necessário (Gzip!)
-		if($this->varCompress 
-			&& isset($_SERVER['HTTP_ACCEPT_ENCODING']) 
-			&& strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false)
-			return ob_gzhandler($out, 5);
+		if($this->varCompress) return ob_gzhandler($out, 5);
 		return $out;
 	}
-	
-
-/** - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-@TODO
-	1 - Passar os métodos seguintes para a classe Type/Html
-	2 - Sintonizar os métodos outBuffer e produce para trabalhar com os vários tipos de documentos (html, xhtml, html5, pdf, xml, zip, etc)
-	
-- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
-
-	/**
-	* Gera a barra de status
-	* TODO : Criar o carregamento e compressão de arquivos CSS/JS para incluir os da barra de status.
-	*
-	* @return string Html para a barra de status
-	*/
-
-	function statusBar($extended = true){
-		$sb = ($extended) ? '<script type="text/javascript">var neos_="none";function neostatus(){var dv=document.getElementById("neostatus").style;if(neos_=="none"){neos_="block";dv.top="10px";dv.width="360px"}else{neos_="none";dv.top="";dv.width=""};document.getElementById("neostatustable").style.display=neos_}</script>' : '';
-		$sb .= '<style>#neostatus{position:fixed;bottom:10px;right:10px;z-index:200;background:#000 url(http://neosphp.org/img/slg.png) 2px 2px no-repeat;background-color:rgba(0,0,0,0.7);cursor:pointer;font-size:10px;color:#FFF;font-family:Helvetica,Tahoma,monospace,\'Courier New\',Courier,serif;margin:0;padding:2px 10px 2px 25px;border:2px solid #FFF;border-radius:10px;box-shadow:0 0 80px #555;text-align:right;overflow:auto}'.(($extended)?'#neostatustable{display:none;width:350px;margin:0;padding:0}#neostatustable tr td{background:transparent !important;padding:0;margin:0}#neostatustable tr th{font-size:12px;font-weight:bold}#neostatustable pre{white-space:pre-wrap}.neostatuslg td{border-bottom:1px dashed #999}.xright{text-align:right}':'').'</style><div id="neostatus"'.(($extended)?' onClick="neostatus()"':'').'>';		
-		if($extended){
-			$sb .= '<table id="neostatustable" title="click para esconder!"><tr><th colspan="2">NEOS PHP Framework - ver. '.NEOS_CAN.'</th></tr><tr><th colspan="2">Arquivos Incluidos</th></tr>';
-			$ct = $cf = 0;
-			foreach(get_included_files() as $f){
-					$fz = filesize($f);
-					$sb .= '<tr><td>'.$f.'</td><td class="xright">'.number_format($fz/1000,2,',','.').'&nbsp;kb</td></tr>';
-					$ct += $fz;$cf++;
-			}
-			$sb .= '<tr><td><b>Total</b> ('.$cf.' arquivos )</td><td>'.number_format($ct/1000,2,',','.').'&nbsp;kb</td></tr>';
-			//mostrando os ítens do "push"
-			if(count($this->varPush) > 0){
-				$sb .= '<tr><th>Mark</th><th>&nbsp;</th></tr>';
-				foreach($this->varPush as $x){foreach($x as $k=>$v){$sb .= '<tr class="neostatuslg"><td>'.$v.'</td><td>'.$k.' ms</td></tr>';}}
-			}
-			$sb .= '</table>';			
-		}
-		return $sb.number_format(round(((memory_get_usage()+memory_get_peak_usage())/2000),0),0,',','.').' kb | '.number_format((microtime(true)-NEOS_INIT_TIME)*1000,0,',','.').' ms</div>';
-	}
-
-
 	
 // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -	
 	/**

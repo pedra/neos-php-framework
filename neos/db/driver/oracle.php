@@ -2,7 +2,7 @@
 /** 
  * Driver para Oracle.
  * @copyright	NEOS PHP Framework - http://neosphp.org
- * @license		http://neosphp.org/license 
+ * @license		http://neosphp.org/license Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
  * @author		Paulo R. B. Rocha - prbr@ymail.com 
  * @version		CAN : B4BC
  * @package		Neos\Db
@@ -127,12 +127,12 @@ class Oracle
 		Resultado:
 			Será forçado o download do arquivo 'script_php.pdf' contendo o resultado do 'SELECT ...' ( campo M_ARQUIVO da TABELA).
 	*/
-	function get_file($sql, $file, $download){
+	function get_file($sql, $file, $force){
 		if($sql=='' || count($data)==0){return false;}
 		$a="";	
 		$this->query($sql);
 		if($this->parse){foreach($this->parse as $row){$a.= $row->{$row_name}->load();}}
-		if(!$download){return $a;}
+		if(!$force){return $a;}
 		else{
 			if($file==''){$file='arquivo.zip';}
 			global $_neos_objects;

@@ -3,7 +3,7 @@
  * Interface para o Conector de Banco de Dados.
  * Base para a transação de fontes de dados diversas (banco de dados, xml. arquivos 'ini', etc). 
  * @copyright	NEOS PHP Framework - http://neosphp.org
- * @license		http://neosphp.org/license 
+ * @license		http://neosphp.org/license Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
  * @author		Paulo R. B. Rocha - prbr@ymail.com 
  * @version		CAN : B4BC
  * @package		Neos\Db
@@ -82,13 +82,5 @@ interface Interface_ {
 	* @return bool				Falso/True
 	*/	
 	static function create($fields = array(), $table, $alias = '');
-	
-	/**
-	* Pega o último erro ocorrido
-	*
-	* @param string $alias Apelido da conexão (definida na configuração).
-	* @return string				String com o erro.
-	*/	
-	static function getErro($alias = '');
 	
 }

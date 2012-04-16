@@ -2,7 +2,7 @@
 	/**
 	 * Funções globais de apoio. Estas funções podem ser chamadas de qualquer lugar do sistema - são globais :P.
 	 * @copyright	NEOS PHP Framework - http://neosphp.org
-	 * @license		http://neosphp.org/license 
+	 * @license		http://neosphp.org/license Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
 	 * @author		Paulo R. B. Rocha - prbr@ymail.com
 	 * @version		CAN : B4BC
 	 * @package		Neos\Helper
@@ -21,8 +21,8 @@
 	 * @param bool $externo True habilita o redirecionamento para outro site (externo)
 	 * @return void 
 	*/
-	function _goto($uri = '', $metodo = '', $cod = 302) {
-		if(strpos($uri, 'http') === false) $uri = URL . $uri; //se tiver 'http' na uri então será externo.
+	function _goto($uri = '', $metodo = '', $cod = 302, $externo = false) {
+	   if($externo == false) $uri = URL . $uri;
 		if (strtolower($metodo) == 'refresh') {header('Refresh:0;url=' . $uri);}
 		else {header('Location: ' . $uri, TRUE, $cod);}
 		exit;
@@ -33,7 +33,7 @@
 	 * Isso garante um resultado gráfico mais elegante - principalmente para depuração de arrays/objetos.
 	 *
 	 * @param mixed $v (valor) Pode ser uma string, número, objeto ou array a serem mostrados.
-	 * @param bool $ec (echo) True mostra imediatamente na tela; True retorna o conteúdo printavel (inversamente ao mesmo parâmetro da função print_r)
+	 * @param bool $ec (echo) True mostra imediatamente na tela; False retorna o conteúdo printavel (inversamente ao mesmo parâmetro da função print_r)
 	 * @param bool $t (tabela) Mostra o resultado em uma tabela levemente estilizada.
 	 *
 	 * @return string|boll
@@ -41,11 +41,11 @@
 	function _pt($v, $ec = true, $t = false) {
 		if($t == false) $x = '<pre>' . print_r($v, true) . '</pre>';
 		if($t == true){
-			$x = '<table border="0" cellpadding="2" cellspacing="3"><tr><th>id</th><th>valor</th></tr>';
+			$x = '<style>table{background:#FFF;padding:10px}td,th{border:1px solid #EEE; padding:3px 10px}</style><table border="0" cellpadding="2" cellspacing="3"><tr><th>INDICE</th><th>VALOR</th></tr>';
 			if(is_array($v) || is_object($v)){
 				foreach ($v as $k => $v) {
 					if (is_array($v) || is_object($v)) $v = '<pre>' . print_r($v, true) . '</pre>';
-					$x.='<tr><td>' . $k . '</td><td>' . $v . '</td></tr>';
+					$x.='<tr><td><b>' . $k . '</b></td><td>' . $v . '</td></tr>';
 				}
 			}
 		else {$x.='<tr><td> </td><td>' . $v . '</td></tr>';}
@@ -144,9 +144,8 @@
 	 * @param string $v Valor a ser mostrado (string)
 	 * @return void
 	*/
-	function _setmark($v=''){		
-		if($v == ''){$x = debug_backtrace(); $v = $x[1]['class'].$x[1]['type'].$x[1]['function'];}
-		return \_view::push(number_format((microtime(true)-NEOS_INIT_TIME)*1000,0,',','.'),$v);
+	function _setmark($v){
+		return \_view::push($str);
 	}
 	
 	/**
@@ -165,6 +164,68 @@
 	}
 	
 	/**
+	 * Adiciona um arquivo Javascript à Aplicação.
+	 *
+	 * @param string $f Nome do arquivo localizado na pasta configurada em "$cfg->app->pathJs".
+	 * @param string $g Grupo - Cria um arquivo único para cada grupo (all, editor, etc - "link" cria um link individual).
+	 * @param string $b Body - se TRUE o link será criado antes do fechamento da tag "body". Caso contrário será na tag "head".
+	 * @return void
+	*/	
+//	function _addJs($f, $g = 'all', $b = true, $url = NULL) {
+//		//Pegando o array varJs	
+//		$js = &_view::this()->varJs;
+//		$f = ($url == NULL) ? URL . _cfg('urlJs') . $f : $url . $f;
+//		
+//		//Conformando o indicador da tag de destino
+//		$b = ($b == true) ? 'b' : 'h'; 
+//		
+//		//Se já existir ignora.		
+//		if (isset($js[$b][$g]) && in_array($f, $js[$b][$g])) return false;
+//		
+//		//Gravando os valores...
+//		$js[$b][$g][] = $f;
+//	}
+	
+	/**
+	 * Adiciona um arquivo CSS à Aplicação.
+	 *
+	 * @param string $f Nome do arquivo localizado na pasta configurada em "$cfg->app->pathCss".
+	 * @param string $m Media - Cria um arquivo único para cada media (all, print, tv, etc - "link" cria um link individual). 
+	 * @return void
+	*/
+//	function _addCss($f, $m='all', $url = NULL) {
+//		//Pegando o array varCss
+//		$css = &_view::this()->varCss;
+//		$f = ($url == NULL) ? URL . _cfg('urlCss') . $f : $url . $f;
+//		
+//		//Se já existir ignora.
+//		if (isset($css[$m]) && in_array($f, $css[$m])) return false;
+//		
+//		//Gravando os valores...
+//		$css[$m][] = $f;
+//	}
+	
+	/**
+	 * Chamando um helper do tipo NEOSTAG (para views)
+	 * O nome da função será prefixada com 'neostag_'
+	 *
+	 * @param string $function Nome da função (neostag).
+	 * @param string $params Parametros da função. 
+	 * @return mixed
+	*/
+//	function _neostag($function, $params){ 
+//		$function = '_neostag' . $function;
+//		//para acelerar: se a função já tiver sido carregada...
+//		if (function_exists($function)) return call_user_func_array($function, $params);
+//		//descobrindo o subpath - se existir
+//		$file = trim(str_replace('_', '/', $function), '/ ');
+//		if(file_exists( APP_HELPER . $file . EXTHLP )) { include_once APP_HELPER . $file . EXTHLP;
+//		} elseif (file_exists( PATH_NEOS . 'neos/helper' . DS . $file . EXTHLP )) { include_once PATH_NEOS . 'neos/helper' . DS . $file . EXTHLP;
+//		} else { return false; }
+//		return call_user_func_array($function, $params);		
+//	}
+	
+	/**
 	 * Chamando um helper.
 	 *
 	 * @param string $helper Nome da função.
@@ -178,9 +239,9 @@
 		//para acelerar: se a função já tiver sido carregada...
 		if (function_exists($helper)) return call_user_func_array($helper, $params);
 		//descobrindo o path - se existir
-		$file = trim(str_replace('_', '/', $helper), '/ ');
+		$file = trim(str_replace('_', '/', $helper), '/ '); 
 		if(file_exists( APP_HELPER . $file . EXTHLP )) { include_once APP_HELPER . $file . EXTHLP;
-		} elseif (file_exists( PATH_NEOS . '/neos/helper' . DS . $file . EXTHLP )) { include_once PATH_NEOS . '/neos/helper' . DS . $file . EXTHLP;
+		} elseif (file_exists( PATH_NEOS . 'neos/helper' . DS . $file . EXTHLP )) { include_once PATH_NEOS . 'neos/helper' . DS . $file . EXTHLP;
 		} else { 
 			_cfg()->error['cod'] = 4;
 			_cfg()->error['function'] = $helper;
@@ -219,7 +280,7 @@
 	//acesso a classe Neos\Doc\Factory - ex,: _docFactory()->produce('html);
 //	function _docFactory(){}
 		
-	//Pega uma tradução num arquivo do NAMESPACE atual + $file ou da pasta "language" (geral) 
+	//Pega uma tradução num arquivo do NEMESPACE atual + $file ou da pasta "language" (geral) 
 //	function _lang($strID, $lang = 'pt-BR', $file = null){}
 	
 	//alias para a classe Neos\Doc\Factory (Document Generator)
@@ -230,5 +291,22 @@
 //	function _www(){}
 	
 
+	
+	
+	//TODO : precisa ser atualizada para o NEOS 2
+    //carrega MODULO
+//    function _modulo($m, $p=array()) {
+//        $m = ucfirst(strtolower(trim($m)));
+//        if ($a = _obj('module/' . $m, true)) {
+//            return $a->get($p);
+//        }if (file_exists(APP_MODULE . strtolower($m) . SEP . 'index' . EXTMOD)) {
+//            require_once(APP_MODULE . strtolower($m) . SEP . 'index' . EXTMOD);
+//            global $_neos_objects;
+//            $_neos_objects['module/' . $m] = new $m($p);
+//            return _obj('module/' . $m)->get($p);
+//        }_obj()->error['cod'] = 6;
+//        trigger_error('Módulo "' . $m . '" não encontrado.');
+//        return false;
+//    }
 
 //Fim...

@@ -2,7 +2,7 @@
 /**
  * Base para todos os objetos do sistema.
  * @copyright	NEOS PHP Framework - http://neosphp.org
- * @license		http://neosphp.org/license 
+ * @license		http://neosphp.org/license Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
  * @author		Paulo R. B. Rocha - prbr@ymail.com
  * @version		CAN : B4BC
  * @package		Neos\Base
@@ -16,7 +16,6 @@ abstract class Base {
 
 	/**
 	 * referencia estática a própria classe!
-	 * Todas as classes que "extends" essa BASE armazenam sua instância singleton neste array.
 	 */
 	static $THIS = array();
 
@@ -29,10 +28,13 @@ abstract class Base {
 	 * @param string $val Parâmetros do método invocado (ignorado!).
 	 * @return this instance
 	*/
-	final public static function this(){
+	public static function __callStatic($var, $val){
 		$name = get_called_class();
+		if($var=='this'){
 			if (!isset(static::$THIS[$name])) static::$THIS[$name] = new static;
 			return static::$THIS[$name];
+		}
+		if(!method_exists(static::$THIS[$name],$var)) trigger_error('Metodo " '.$var.' " não existe!');
 	}
 
 	/**
@@ -46,12 +48,15 @@ abstract class Base {
 	static final function pushToLog($content = NULL, $file = NULL){
 		if(\_cfg::get()->logfile == '') return false;
 		if($file == NULL) $file = \_cfg::get()->logfile;
-		if($content == NULL) $content = _pt($GLOBALS,false,true);
-		if(!is_array($content)) $contt = $content;
-		else{
+		if($content == NULL) $content = '<pre>' . print_r($GLOBALS,true) . '</pre>';
+		if(!is_array($content)):
+			$contt = $content;
+		else:
 			$contt = "\n" . date('Y-m-d H:i:s');
-			foreach($content as $v){$contt .= ' | ' . $v;}
-		}
+			foreach($content as $v):
+				$contt .= ' | ' . $v;
+			endforeach;
+		endif;
 		//gravando o log
 		file_put_contents($file, $contt, FILE_APPEND);
 	}
@@ -69,4 +74,5 @@ abstract class Base {
 	final function __call($var, $val) {
 		return _helper($var, $val);
 	}
+
 }

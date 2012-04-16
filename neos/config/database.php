@@ -2,7 +2,7 @@
 /** 
  * Configuração de Banco de Dados 
  * @copyright	NEOS PHP Framework - http://neosphp.org
- * @license		http://neosphp.org/license 
+ * @license		http://neosphp.org/license Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
  * @author		Paulo R. B. Rocha - prbr@ymail.com 
  * @version		CAN : B4BC
  * @package		Neos\Config
@@ -10,26 +10,26 @@
 
 
 //DEFAULTS
-$cfg->db->active			= 'sqlite';		//alias para conexão de BD default
+$cfg->db->active				= 'sqlite';		//alias para conexão de BD default
 
 //DB::SQLITE
-$cfg->db->sqlite->driver	= 'sqlite';
-$cfg->db->sqlite->database	= PATH_APP . DS . 'neos.db';
+$cfg->db->sqlite->driver		= 'sqlite';
+$cfg->db->sqlite->database		= PATH_APP . 'neos.db';
 
 //DB::MYSQL
-//$cfg->db->mysql->driver	= 'mysql';
-//$cfg->db->mysql->host		= 'localhost';
-//$cfg->db->mysql->user		= 'neos';
-//$cfg->db->mysql->pass		= '123456';
-//$cfg->db->mysql->database	= 'neos';
-//$cfg->db->mysql->charset	= 'utf8';
+$cfg->db->mysql->driver		= 'mysql';
+$cfg->db->mysql->host		= 'localhost';
+$cfg->db->mysql->user		= 'neos2';
+$cfg->db->mysql->pass		= 'a123456';
+$cfg->db->mysql->database	= 'neos2';
+$cfg->db->mysql->charset	= 'utf8';
 
 //DB::MYSQL_PDO
-//$cfg->db->mysql_pdo->driver	= 'pdo';
-//$cfg->db->mysql_pdo->dsn		= 'mysql:host=localhost;dbname=neos';
-//$cfg->db->mysql_pdo->user		= 'neos';
-//$cfg->db->mysql_pdo->pass		= '123456';
-//$cfg->db->mysql_pdo->options	= array('charset'=>'utf8');
+$cfg->db->mysql_pdo->driver		= 'pdo';
+$cfg->db->mysql_pdo->dsn		= 'mysql:host=localhost;dbname=neos2';
+$cfg->db->mysql_pdo->user		= 'neos2';
+$cfg->db->mysql_pdo->pass		= 'a123456';
+$cfg->db->mysql_pdo->options	= array('charset'=>'utf8');
 
 /**
  * Vários exemplos de conexões BD

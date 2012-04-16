@@ -1,21 +1,19 @@
 <?php
+namespace Neos\Doc;
 /**
  * Renderização de Views HTML
  * @copyright	NEOS PHP Framework - http://neosphp.org
- * @license		http://neosphp.org/license
+ * @license		http://neosphp.org/license Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
  * @author		Paulo R. B. Rocha - prbr@ymail.com
- * @version		CAN : C1A0
+ * @version		CAN : B4BC
  * @package		Neos\Doc
  * @access 		public
- * @since		CAN : C1A0
+ * @since		CAN : B4BC
  */
-
-namespace Neos\Doc\Type;
-use Neos\Doc as Doc;
 
 class Html
 	extends \NEOS {
-		
+
 	/**
 	 * Renderiza todas as views indicadas em Doc\Factory::$varView.
 	 * Retorna um array com o produto da renderização ou 'ecoa' o resultado.
@@ -24,11 +22,10 @@ class Html
 	 * @return array|void
 	*/
 	function produce($get = false){
-				
-		if(isset(Doc\Factory::this()->varViewVar[0])){extract(Doc\Factory::this()->varViewVar[0]);}
+		if(isset(Factory::this()->varViewVar[0])){extract(Factory::this()->varViewVar[0]);}
 		$out = array();
-		foreach(Doc\Factory::this()->varViews as $nomeView=>$valView){
-			$varq = APP_VIEW  . Doc\Factory::this()->varType . DS . $valView . EXTVW;
+		foreach(Factory::this()->varViews as $nomeView=>$valView){
+			$varq = APP_VIEW  . Factory::this()->varType . DS . $valView . EXTVW;
 			
 			//pegando a view do template - se existir
 			if(_cfg()->template != ''){
@@ -36,15 +33,16 @@ class Html
 					$varq = _cfg()->template_path . _cfg()->template . DS . 'engine' . DS . 'views' . DS . $valView . EXTVW;
 				}
 			}
-			$neosarquivo = file_exists($varq) ? file_get_contents($varq): trigger_error('<b>View não encontrada!</b> <br>' .$varq);			
- 			$ret = true;
+			if(!file_exists($varq)) trigger_error('<b>Não consegui localizar o arquivo da VIEW solicitada!</b> <br />Local : ' . $varq);
+			$neosarquivo = file_get_contents($varq);
+			$ret = true;
 			$ponteiro = 0;
 			while($ret = $this->_pegatag($neosarquivo, $ponteiro)){
-				$ponteiro = 0 + $ret['-final-'];
+				@$ponteiro = 0 + $ret['-final-'];
 				$vartemp = '';
 				
-				if(isset(Doc\Factory::this()->varViewVar[0][$ret['-tipo-']])){$ret['var'] = $ret['-tipo-']; $ret['-tipo-'] = 'var';}
-				if(is_string($nomeView) && isset(Doc\Factory::this()->varViewVar[$nomeView][$ret['-tipo-']])){$ret['var'] = $ret['-tipo-']; $ret['-tipo-'] = 'var';}
+				if(isset(Factory::this()->varViewVar[0][$ret['-tipo-']])){$ret['var'] = $ret['-tipo-']; $ret['-tipo-'] = 'var';}
+				if(is_string($nomeView) && isset(Factory::this()->varViewVar[$nomeView][$ret['-tipo-']])){$ret['var'] = $ret['-tipo-']; $ret['-tipo-'] = 'var';}
 
 				if (isset($ret['-tipo-'])){
 					if ($ret['-tipo-'] == 'url'){$vartemp = _app('URL');}
@@ -62,7 +60,7 @@ class Html
 			}//while
 			
 			//"Avaliando" o PHP contido no HTML
-			if(isset(Doc\Factory::this()->varViewVar[$nomeView])) extract(Doc\Factory::this()->varViewVar[$nomeView]);
+			if(isset(Factory::this()->varViewVar[$nomeView])) extract(Factory::this()->varViewVar[$nomeView]);
 			ob_start();
 			eval('?>' . $neosarquivo);
 			
@@ -155,12 +153,12 @@ class Html
 	 * @param string $nomeView Nome da view atual
 	 * @return string|html
 	*/
-	function __numlist($ret, $nomeView){
+	function _numlist($ret, $nomeView){
 		$vartemp = '';
 		if(isset($ret['var'])){
-			if(isset(Doc\Factory::this()->varViewVar[0][trim($ret['var'])])){$v=Doc\Factory::this()->varViewVar[0][trim($ret['var'])];}
+			if(isset(Factory::this()->varViewVar[0][trim($ret['var'])])){$v=Factory::this()->varViewVar[0][trim($ret['var'])];}
 			else{$v='';}
-			if(is_string($nomeView)&&Doc\Factory::this()->varViewVar[$nomeView][trim($ret['var'])]!=''){$v=Doc\Factory::this()->varViewVar[$nomeView][trim($ret['var'])];}
+			if(is_string($nomeView)&&Factory::this()->varViewVar[$nomeView][trim($ret['var'])]!=''){$v=Factory::this()->varViewVar[$nomeView][trim($ret['var'])];}
 			unset($ret['var'],$ret['-inicio-'],$ret['-tamanho-'],$ret['-final-'],$ret['-tipo-'],$ret['conteudo']);
 			if($v!='' && is_array($v)){
 				$ul='';
@@ -188,12 +186,12 @@ class Html
 	 * @param string $nomeView Nome da view atual
 	 * @return string|html
 	*/
-	function __list($ret, $nomeView){
+	function _list($ret, $nomeView){
 		$vartemp = '';
 		if(isset($ret['var'])){
-			if(isset(Doc\Factory::this()->varViewVar[0][trim($ret['var'])])){$v=Doc\Factory::this()->varViewVar[0][trim($ret['var'])];}
+			if(isset(Factory::this()->varViewVar[0][trim($ret['var'])])){$v=Factory::this()->varViewVar[0][trim($ret['var'])];}
 			else{$v='';}
-			if(is_string($nomeView)&&Doc\Factory::this()->varViewVar[$nomeView][trim($ret['var'])]!=''){$v=Doc\Factory::this()->varViewVar[$nomeView][trim($ret['var'])];}
+			if(is_string($nomeView)&&Factory::this()->varViewVar[$nomeView][trim($ret['var'])]!=''){$v=Factory::this()->varViewVar[$nomeView][trim($ret['var'])];}
 			unset($ret['var'],$ret['-inicio-'],$ret['-tamanho-'],$ret['-final-'],$ret['-tipo-'],$ret['conteudo']);
 			if($v!='' && is_array($v)){
 				$ul='';
@@ -221,12 +219,12 @@ class Html
 	 * @param string $nomeView Nome da view atual
 	 * @return string|html
 	*/
-	function __select($ret, $nomeView){
+	function _select($ret, $nomeView){
 		$vartemp = '';
 		if(isset($ret['var'])){
-			if(isset(Doc\Factory::this()->varViewVar[0][trim($ret['var'])])){$v=Doc\Factory::this()->varViewVar[0][trim($ret['var'])];}
+			if(isset(Factory::this()->varViewVar[0][trim($ret['var'])])){$v=Factory::this()->varViewVar[0][trim($ret['var'])];}
 			else{$v='';}
-			if(is_string($nomeView)&&Doc\Factory::this()->varViewVar[$nomeView][trim($ret['var'])]!=''){$v=Doc\Factory::this()->varViewVar[$nomeView][trim($ret['var'])];}
+			if(is_string($nomeView)&&Factory::this()->varViewVar[$nomeView][trim($ret['var'])]!=''){$v=Factory::this()->varViewVar[$nomeView][trim($ret['var'])];}
 			unset($ret['var'],$ret['-inicio-'],$ret['-tamanho-'],$ret['-final-'],$ret['-tipo-'],$ret['conteudo']);
 			if($v!=''){
 				$ul='';
@@ -273,7 +271,7 @@ class Html
 		$t = (strpos(strtolower($t), 'b') === false) ? 'h' : 'b';
 		
 		//Adicionando o arquivo
-		Doc\Factory::_addJs($f, $m, $t, $url);
+		Factory::_addjs($f, $m, $t, $url);
 		
 		return '';
 	}
@@ -295,7 +293,7 @@ class Html
 		if(isset($ret['rel'])) $url = ( strpos($ret['rel'], 'template') !== false ) ? URL . _cfg('template_url') . '/' . _cfg()->template . '/' : $url;
 
 		//Adicionando o arquivo
-		Doc\Factory::_addCss($ret['href'], $m, $url);
+		Factory::_addCss($ret['href'], $m, $url);
 		
 		return '';
 	}
@@ -306,7 +304,7 @@ class Html
 	 * @param array $ret dados da neosTag
 	 * @return string|html
 	*/
-	function __view($ret, $nomeView){
+	function _view($ret, $nomeView){
 		if(isset($ret['name'])){
 			if(file_exists(APP_VIEW . $ret['name'].'.html')){
 				return file_get_contents(APP_VIEW .$ret['name'].'.html');
@@ -325,13 +323,13 @@ class Html
 		$temp='';
 		$ret['var'] = trim($ret['var']);
 		
-		if(isset(Doc\Factory::this()->varViewVar[0][$ret['var']])) { $v = Doc\Factory::this()->varViewVar[0][$ret['var']];}
+		if(isset(Factory::this()->varViewVar[0][$ret['var']])) { $v = Factory::this()->varViewVar[0][$ret['var']];}
 		else { $v = '';}
 
 		if( is_string($nomeView) 
-			&& isset(Doc\Factory::this()->varViewVar[$nomeView][$ret['var']])
-			&& Doc\Factory::this()->varViewVar[$nomeView][$ret['var']] != '') 
-			$v = Doc\Factory::this()->varViewVar[$nomeView][$ret['var']];
+			&& isset(Factory::this()->varViewVar[$nomeView][$ret['var']])
+			&& Factory::this()->varViewVar[$nomeView][$ret['var']] != '') 
+			$v = Factory::this()->varViewVar[$nomeView][$ret['var']];
         
 		unset($ret['var'],$ret['-inicio-'],$ret['-tamanho-'],$ret['-final-'],$ret['-tipo-'],$ret['conteudo']);
 
@@ -354,7 +352,7 @@ class Html
 	 * @param string $nomeView Nome da view atual
 	 * @return string|html
 	*/
-	final function __modulo($r, $nomeView){
+	final function _modulo($r, $nomeView){
 		if(isset($r['name'])){ 
 			$n = $r['name']; 
 			unset($r['name']); 

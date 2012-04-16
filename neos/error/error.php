@@ -3,7 +3,7 @@ namespace Neos\Error;
 /** 
  * Classe para tratamento de erros e exceções.
  * @copyright	NEOS PHP Framework - http://neosphp.org
- * @license		http://neosphp.org/license 
+ * @license		http://neosphp.org/license Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
  * @author		Paulo R. B. Rocha - prbr@ymail.com 
  * @version		CAN : B4BC
  * @package		Neos\Error
@@ -12,14 +12,12 @@ namespace Neos\Error;
  * @since		CAN : B4BC
  */
 
-class Error 
-	extends \Exception {
-		
+class Error extends \Exception {
 	/**
 	 * referencia estática a própria classe!
 	 */
 	public static $THIS = null;
-
+	
 	
 	/**
 	 * Construtor da classe Exception (parent)
@@ -44,35 +42,28 @@ class Error
 	/**
 	 * Controle de erros do Framework
 	 * 
-	 * @param $n 	código do erro
-	 * @param $m	mensagem de erro
-	 * @param $f	arquivo onde ocorreu o erro
-	 * @param $l	número da linha onde ocorreu o erro
-	 * @param $v	array com variáveis disponíveis no contexto
-	 *
-	 * @return html|void	mostra uma mensagem de erro; toma uma decisão programada ou retorna sem ação. 
+	 * @param $var nome da variável requerida
+	 * @param $val valor a ser inserido
+	 * @return mixed conteudo da variável requerida
 	*/
-	public static function error($n=0, $m='', $f='', $l='', $v=''){					
+	public function error($n=0, $m='', $f='', $l='', $v=''){					
 		$d = (count($v)>0) ? '<pre>Dados : ' . print_r($v,true) . '</pre>':'';
-		//\Neos\Doc\Factory::this()->setBuffer
-		
-
-		ob_clean();
-		
-		exit(	self::head().
-				'<p>' . $m . '</p>
-				<p>Arquivo : ' . $f . ' [linha: ' . $l . ']</p>
-				<p>Código do erro : ' . $n . '</p>'.
-				self::this()->_errorGetTrace().  
-				self::footer()
-			);		
+		\_docFactory::this()->setBuffer(
+										self::head().
+										'<p>' . $m . '</p>
+										<p>Arquivo : ' . $f . ' [linha: ' . $l . ']</p>
+										<p>Código do erro : ' . $n . '</p>'.
+										$this->_errorGetTrace().  
+										self::footer()
+										);
+		exit('<p>NEOS PHP Framework - errorTracer</p>');
 	}
 	
 	/**
 	 * Controle de exceção do Framework
 	 * 
-	 * @param $e objeto Exception 
-	 * @return void O retorno depende da função 'self::error' (acima).
+	 * @param $e 
+	 * @return void
 	*/
 	public static function exception($e){ 
 		$m = $e->getMessage();
@@ -80,7 +71,15 @@ class Error
 		$l = $e->getLine();
 		$n = $e->getCode();		
 		if($n == 0 && method_exists($e, 'getSeverity')) $n = $e->getSeverity();
-		self::error($n, $m, $f, $l);
+		\_docFactory::this()->setBuffer(
+										self::head().
+										'<p>' . $m . '</p>
+										<p>Arquivo : ' . $f . ' [linha: ' . $l . ']</p>
+										<p>Código  : ' . $n . '</p>'.
+										self::this()->_errorGetTrace($e).  
+										self::footer()
+										);										
+		exit('<p>NEOS PHP Framework - exceptionTracer</p>');
 	}
 	
 	/**
@@ -95,15 +94,19 @@ class Error
 			$e = $this; 
 			$isErro = false;
 		}
-		$tp = '		
+		$content = '
+		<h3>Trace:</h3>
     <div class="t">
-        <table width="100%" border="0" cellspacing="3" cellpadding="3">
+        <table cellspacing="0">
             <tr>
                 <th>Class</th>
-                <th>File [line]</th>
+                <th>&nbsp;</th>
+                <th>Function</th>
+                <th>File</th>
+                <th>Line</th>
             </tr>';
 		
-		$x = $e->getTrace();
+		$x=$e->getTrace();
 		
 		//diferente em Error/Exception		
 		if(!$isErro){ 
@@ -116,15 +119,25 @@ class Error
 		$x = array_reverse($x);
 		
 		//lendo o registro (trace)		
-		foreach($x as $tc){
-				$tp .= '<tr><td>' . ((isset($tc['class'])) ? $tc['class'] : '&nbsp;').
-									((isset($tc['type'])) ? $tc['type'] : '&nbsp;').
-									((isset($tc['function'])) ? $tc['function'].'()' : '&nbsp;').'</td><td>'.
-									((isset($tc['file'])) ? $tc['file'] : '&nbsp;').' ['.((isset($tc['line'])) ? $tc['line'] : '&nbsp;').']</td></tr>';			
-			}
+		foreach($x as $k=>$tc){
+			$content .= '<tr><td>';
+			$content .= (isset($tc['class'])) ? $tc['class'] : '&nbsp;';
+			$content .= '</td><td align="center">';
+			$content .= (isset($tc['type'])) ? $tc['type'] : '&nbsp;';
+			$content .= '</td><td>';	
+			$content .= (isset($tc['function'])) ? $tc['function'].'()' : '&nbsp;';			
+			$content .= '</td><td>';			
+			$content .= (isset($tc['file'])) ? $tc['file'] : '&nbsp;';
+			$content .= '</td><td align="center">';
+			$content .= (isset($tc['line'])) ? $tc['line'] : '&nbsp;';
+			$content .= '</td></tr>
+			';			
+		}
 		
-		return $tp . '
-		</table>		
+		return $content . '
+			<tr><td colspan="6">&nbsp;</td></tr>
+		</table>
+		<address>Desative esta mensagem se a sua aplicação estiver em "produção". Crie um controlador para o tratamento de erros da aplicação!<br />Você pode encontrar mais informações no <b><a href="http://neosphp.org/manual">manual</a></b> do NEOS.</address>		
 	</div>';
 	}	
 	

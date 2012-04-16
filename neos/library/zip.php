@@ -9,7 +9,7 @@
  * refactored it and added several additional methods -- Rick Ellis
  *
  * @copyright	NEOS PHP Framework - http://neosphp.org
- * @license		http://neosphp.org/license 
+ * @license		http://neosphp.org/license Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
  * @author		Paulo R. B. Rocha - prbr@ymail.com
  * @version		CAN : B4BC
  * @package		Neos\Library

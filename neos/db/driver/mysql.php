@@ -2,7 +2,7 @@
 /** 
  * Driver para Mysql.
  * @copyright	NEOS PHP Framework - http://neosphp.org
- * @license		http://neosphp.org/license 
+ * @license		http://neosphp.org/license Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
  * @author		Paulo R. B. Rocha - prbr@ymail.com 
  * @version		CAN : B4BC
  * @package		Neos\Db
@@ -20,8 +20,6 @@ class Mysql
 	
 	private $con;
 	public 	$num_rows=0;
-	public 	$erro = '';
-	public	$query = '';
 	
 	//CONECTANDO
 	function connect($al = ''){
@@ -72,7 +70,6 @@ class Mysql
 	function query($sql = ''){
 		if($sql==''){trigger_error('Query sem argumentos!');return false;}
 		unset($this->res);
-		$this->query = $sql;
 		$r=mysql_query($sql);
 		if(is_resource($r)){		
 			while($x=mysql_fetch_object($r)){$this->res[]=$x;}
@@ -96,9 +93,7 @@ class Mysql
 			$valores.=$virgula.$aspa.mysql_real_escape_string($value).$aspa;
 			$virgula=',';
 		}
-		$this->query = 'INSERT INTO '.trim($t).' ('.$keys.') VALUES ('.$valores.')';
-		$ret = mysql_query('INSERT INTO '.trim($t).' ('.$keys.') VALUES ('.$valores.')');
-		if(!$ret) $this->erro = mysql_error() . '<br />Query: ' . $this->query;
+		mysql_query('INSERT INTO '.trim($t).' ('.$keys.') VALUES ('.$valores.')');
 		$this->num_rows = mysql_affected_rows();
 		return $this->num_rows;
 	}
@@ -110,20 +105,12 @@ class Mysql
 			if(is_string($v)){$v="'".mysql_real_escape_string($v)."'";}
 			$kk.=$k.'='.$v.' ,';$yy[]=$v;}
 		$k=substr($kk,0,-1);
-		$this->query = 'UPDATE '.trim($t).' SET '.$k.' WHERE '.trim($w);
 		mysql_query('UPDATE '.trim($t).' SET '.$k.' WHERE '.trim($w));
-
 		$this->num_rows = mysql_affected_rows();
 		return $this->num_rows;
 	}
 	
 	//Não implementado
-	function get_file($sql, $file , $download){return false;}
-	
-	//retorna a mensagem de erro
-	function getErro(){
-		if($this->erro == '') return $this->erro = 	mysql_error();
-		else return $this->erro;
-	}
+	function get_file($sql, $file , $force){}
 }
 ?>

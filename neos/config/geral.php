@@ -2,7 +2,7 @@
 /** 
  * Configuração Geral 
  * @copyright	NEOS PHP Framework - http://neosphp.org
- * @license		http://neosphp.org/license 
+ * @license		http://neosphp.org/license Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
  * @author		Paulo R. B. Rocha - prbr@ymail.com 
  * @version		CAN : B4BC
  * @package		Neos\Config
@@ -36,7 +36,6 @@ $cfg->static_view			= true;  //habilitação de views estaticas
 $cfg->out_expires			= 24 * 3600;  //expiração das páginas processadas [neos_output()] em segundos
 $cfg->out_compress			= true;  //ativa a compactação da saída (somente Views)
 $cfg->out_filter			= false;   //ativa a filtragem da saida para "head" e "body"
-$cfg->out_restricted		= true;		//se TRUE mostra somente a saída processada pela classe DocFactory 
 
 //HTML
 $cfg->html->doctype			= 'xhtml1-trans';
@@ -61,15 +60,15 @@ $cfg->jsfw->path			= PATH_WWW . 'js/' . $cfg->jsfw->filename;
 //ADMIN CORE SERVICE
 $cfg->admin_user			= 'neosAdmin';
 $cfg->admin_pass			= MD5('123456');
-$cfg->admin_url				= '12702341910a53c77d8f6e354b7dc5f2'; //'neoscoreadmin';
+$cfg->admin_url				= ''; //'neoscoreadmin';
 $cfg->admin_controller		= 'control';
 
 //REPORT
 $cfg->mode					= 'test';    //pode ser production ou test (desenvolvimento)
-$cfg->status				= 'displayextended';    //mostra a barra de status - opções: 'displayfileextended'
+$cfg->status				= 'display';    //mostra a barra de status - opções: 'displayfile'
 $cfg->error['action']		= 'display'; //ação em caso de erro - opções: 'displayfileroutemail'
 $cfg->error['level']		= E_ALL;    //nivel dos erros reportados/ignorados
-$cfg->logfile				= PATH_APP . '/log_test.html';   //arquivo de log de erros (se 'action' contiver 'file')
+$cfg->logfile				= PATH_WWW . 'logs' . DS . 'log_test.txt';   //arquivo de log de erros (se 'action' contiver 'file')
 $cfg->error_route			= 'usererror';   //ir para este controller se houver erros (se 'action' contiver 'route')
 
 //USER OBJECT

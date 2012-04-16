@@ -2,7 +2,7 @@
 /** 
  * DocType para documentos HTML/XHTML 
  * @copyright	NEOS PHP Framework - http://neosphp.org
- * @license		http://neosphp.org/license 
+ * @license		http://neosphp.org/license Todos os direitos reservados - proibida a utilização deste material sem prévia autorização.
  * @version		CAN : B4BC
  * @package		Neos\Config
  
