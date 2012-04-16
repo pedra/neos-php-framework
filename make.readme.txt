@@ -1,0 +1,14 @@
+Conversor para o tipo PHAR do PHP.
+
+
+
+Salve o arquivo no root de seu servidor web (Apache) e rode o script 'make.phar'.
+
+Se seu servidor não reconhecer arquivos phar, adicione o seguinte no "conf" do Apache:
+
+AddType application/x-httpd-php .phar
+
+Outra alternativa é usar um arquivo "index.php" para chamar o phar, com o seguinte conteúdo:
+
+include 'make.phar';
+
