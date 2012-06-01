@@ -33,6 +33,8 @@
     //considerando "localhost" como o endereço de seu servidor</code>
 <p>Uma tela de "boas-vindas" deve ser mostrada em seu navegador.</p>
 
+<p><font color="#F00">Caso você não consiga ou não tenha acesso as configurações do Apache e do PHP você pode também renomear o arquivo "neos.phar" para "index.php". Isso somente para o teste acima.</font></p>
+
 <h2>Criando um "Hello World"</h2>
 <p>Vamos criar a estrutura básica (MVC) de uma aplicação com o NEOS.</p>
 <p>Crie a seguinte estrutura de pastas e arquivos:</p>
