@@ -5,8 +5,8 @@
 <p>Mas se esta é a sua primeira vez não fique apreensivo: será muito fácil instalar e começar a usar seu novo <strike>brinquedo</strike> framework.</p>
 
 <h2>Download</h2>
-<p>Pensando em um passo-a-passo bem completo, "pormenorizado", vamos começar fazendo o download do NEOS.</p>
-<p>Você deve escolher sempre a última versão e no formato PHAR. Caso sua intenção é estudar o framework (seus scripts, sua estrutura) e posteriormente até mesmo alterá-lo, então você deve baixar a versão SourceCode, zipada</p>
+<p>Pensando em um passo-a-passo bem completo, vamos começar fazendo o download do NEOS.</p>
+<p>Você deve escolher sempre a última versão e no formato PHAR. Caso sua intenção seja estudar o framework (seus scripts, sua estrutura) e posteriormente até mesmo alterá-lo, então você deve baixar a versão SourceCode; zipada.</p>
 
 <p>Veja neste <a href="http://code.google.com/p/neos-php-framework/downloads/list">link</a> as versões disponíveis e faça o download apropriado.</p>
 
