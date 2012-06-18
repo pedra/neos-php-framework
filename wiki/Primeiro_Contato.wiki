@@ -97,6 +97,7 @@ você pode criar outras pastas conforme a necessidade de sua aplicação
 <code><?php
 
 class Controller_Inicial
+
             extends NEOS {
 		
     function index() {
