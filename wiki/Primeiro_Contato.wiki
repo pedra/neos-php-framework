@@ -15,7 +15,7 @@
 <ul>
 <li>Servidor web Apache (de acesso público ou instalado em sua máquina de teste)</li>
 <li>Módulo re-write do Apache ativado</li>
-<li>O PHP na versão 5.3(+) instalado</li>
+<li>PHP na versão 5.3(+) instalado</li>
 </ul>
 
 <p>Para usar os arquivos PHAR diretamente chamados na url, você terá que incluir (se já não estiver) a seguinte linha no arquivo de configuração do Apache:</p>
