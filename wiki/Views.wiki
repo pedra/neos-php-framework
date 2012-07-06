@@ -29,6 +29,7 @@
 <p>Veja esses exemplos:</p>
 <code>     $var['titulo'] = 'Título da página';
     $var['nome'] = 'Paulo Rocha';
+    
     _view::set('home', $var);</code>
     
 <p>Usando o método 'value':</p>
@@ -41,6 +42,7 @@
     $var['nome'] = 'Paulo Rocha';
     
     _view::val($var);
+    
     _view::set('home');</code>
 
 <h4>NeosTags</h4>
