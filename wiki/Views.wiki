@@ -27,17 +27,17 @@
 </ul>
 <p>Para criar variáveis que serão usadas somente na view (neosTags) voce deve usar um array (como no exemplo abaixo) ou preferencialmente usar o método 'value' da classe View.</p>
 <p>Veja esses exemplos:</p>
-<code>    $var['titulo'] = 'Título da página';
+<code>     $var['titulo'] = 'Título da página';
     $var['nome'] = 'Paulo Rocha';
     _view::set('home', $var);</code>
     
 <p>Usando o método 'value':</p>
-<code>    _view::val('titulo', 'Titulo da página'); //"val" é um alias para "value"
+<code>     _view::val('titulo', 'Titulo da página'); //"val" é um alias para "value"
     _view::value('nome', 'Paulo Rocha');
     
     _view::set('home');</code>
 <p>O método "value" também aceita um array no primeiro argumento e funcionará da mesma forma como o exemplo para o método "set":</p>
-<code>    $var['titulo'] = 'Título da página';
+<code>     $var['titulo'] = 'Título da página';
     $var['nome'] = 'Paulo Rocha';
     
     _view::val($var);
