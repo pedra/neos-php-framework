@@ -22,8 +22,8 @@
 <p>Onde:</p>
 <ul>
     <li>nome_do_arquivo = É o nome do arquivo (app/view/html/nome_do_arquivo.html) que contem a view;</li>
-    <li>variaveis = (opcional) Um array com variáveis e seus valores que serão usadas somente na view (neosTags);</li>
-    <li>nome = (opcional) Você pode atribuir um nome para reerenciar a view sem ter que usar o nome do arquivo.</li>
+    <li>variaveis = (opcional) Um array com variáveis e seus valores que serão usadas somente nesta view (neosTags);</li>
+    <li>nome = (opcional) Você pode atribuir um nome para referenciar a view sem ter que usar o nome do arquivo para isso.</li>
 </ul>
 <p>Para criar variáveis que serão usadas somente na view (neosTags) voce deve usar um array (como no exemplo abaixo) ou preferencialmente usar o método 'value' da classe View.</p>
 <p>Veja esses exemplos:</p>
