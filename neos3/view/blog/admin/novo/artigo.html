@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>BOOK - Novo Artigo</title>
+<base href="@BASE">
+<link rel="shortcut icon" type="image/x-icon" href="@BASE public/style/img/favicon.ico">
+<link href="@BASE public/style/jquery-ui.css" rel="stylesheet" type="text/css" >
+<link href="@BASE public/style/admin.css" rel="stylesheet" type="text/css" >
+
+<script src="@BASE public/script/jquery-ui.js"></script>
+<script src="public/script/nicEdits.js"></script>
+<script src="@BASE public/script/admin.js"></script>
+</head>
+
+<body>
+	<h2>Nova Publicação</h2>
+  <div>@cont</div>
+	<form action="@BASE admin/novo/artigo" method="post">
+  	<label>Título:</label>
+    <input type="text" name="titulo"/>
+    
+    <label>Tags: <small>[palavras separadas por vírgulas]</small></label>
+    <input type="text" name="tags"/>
+    
+    <label>Publicar em:</label>
+    <input name="data" value="@data"/>
+    
+    <textarea name="conteudo">@conteudo</textarea>
+    
+    <button type="submit" name="salvar">Salvar</button>
+    <button type="submit" name="preview">Preview</button>
+    <button type="submit" name="cancelar">Cancelar</button> 
+  </form>
+  
+</div>
+
+</body>
+</html>
