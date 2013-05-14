@@ -1,0 +1,34 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Teste PHAR</title>
+<base href="@BASE">
+<link rel="shortcut icon" type="image/x-icon" href="public/style/img/favicon.ico">
+<link href="public/style/screen.css" rel="stylesheet" type="text/css" >
+</head>
+
+<body>
+<div class="container helper">
+    <h1>Teste com PHAR</h1>
+    <h2>Pré-requisitos</h2>
+    <p>Sua versão do PHP deve ser a <b>5.3</b> ou superior, rodando em &copy;Windows ou Linux e com suporte a Zlib somente se for compactar o arquivo gerado.</p>
+    <p>O arquivo <b>php.ini</b> deve ter a seguinte linha:<code title="Copie & cole!">phar.readonly = <b>off</b></code></p>
+    <p>O arquivo de configurações do Apache (<b>httpd.conf</b>) deve ter a linha:<code title="Copie & cole!">AddType application/x-httpd-php <b>.phar</b></code></p>
+    
+    
+  
+  <form action="@BASE main/run" method="post">
+    <label>Nome</label>
+    <input type="text" name="nome" value="@nome" />
+    <label>Email</label>
+    <input type="text" name="email" value="@email" />
+    <button type="submit">Salvar</button>
+  </form>
+  
+</div>
+<div class="license">&copy; Paulo R. B. Rocha - <a href="mailto: prbr@ymail.com">prbr@ymail.com</a> - (+55 21) 3630-5920
+	<p>É PROIBIDA A COMERCIALIZAÇÃO, DISTRIBUIÇÃO POR QUALQUER MEIO, MODIFICAÇÃO, ALTERAÇÃO E SER USADO COMO BASE OU PARTE DE OUTRO SISTEMA OU SOFTWARE SEM A DIVULGAÇÃO DESTE TEXTO TITULADO COMO LIÇENCA E NOME E DADOS DE CONTATO DO AUTOR NO MESMO SUPORTE OU MEDIA, LEGÍVEL PARA O USUÁRIO.</p>
+</div>
+</body>
+</html>
