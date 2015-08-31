@@ -1,0 +1,83 @@
+
+<h1>Views</h1>
+
+<p>Esta é uma das partes mais interessantes do NEOS , pois, além de carregar as views na tela do browser, possui um 'template engine' simples, porém, muito poderoso.</p>
+<p>Esse template implementa as NeosTags, um cache, além de um sistema modular, permitindo assim, futuras expansões e novas implementações.</p>
+<p>O sistema responsável pelo controle de views e templates é o <b>'DocFactory'</b> - literalmente traduzido como <i>'fabricante de documentos'</i> - e encontra-se em 'neos/doc/factory'.</p>
+<p>O DocFactory foi criado não apenas para produzir HTML, mas, todo o tipo de saída para o browser, para download, para gravação em arquivo (etc), tais como: xml, pdf, jason, flash, texto, binário, etc. Atualmente está dedicado somente a html com a expectativa de muito em breve termos 'drivers' para todos os tipos citados (help-us!).</p>
+
+
+<h2>Simples Views</h2>
+
+<p>Esta seção trata do uso mais comum do DocFactory: a produção de uma saída html para o browser (navegador).</p>
+<p>As views são armazenadas na pasta 'app/view/html' e devem ter a extensão '.html'. Essa extensão foi escolhida para facilitar a vida dos que trabalham somente com html - os designers - uma vez que, na maioria das empresas e agencias esses profissionais trabalham separadamente; basta dar-lhes acesso à essa área e tudo fica melhor :P.</p>
+
+<h3>Chamando uma View</h3>
+<p>Na verdade a expressão correta seria: <i>"indicando a view ou views a serem processadas"</i>.</p>
+<p>O seguinte comando indica ao DocFactory qual view deve ser carregada e processada. Esse "carregamento" é feito em pilha, ou seja, mais de uma view pode ser carregada e será processada na sequência em que for declarada.</p>
+```
+
+void _view::set(String nome_do_arquivo [, Array variaveis, String nome]);```
+
+<p>Onde:</p>
+<ul>
+<blockquote><li>nome_do_arquivo = É o nome do arquivo (app/view/html/nome_do_arquivo.html) que contem a view;</li>
+<li>variaveis = (opcional) Um array com variáveis e seus valores que serão usadas somente nesta view (neosTags);</li>
+<li>nome = (opcional) Você pode atribuir um nome para referenciar a view sem ter que usar o nome do arquivo para isso.</li>
+</ul>
+<p>Para criar variáveis que serão usadas somente na view (neosTags) voce deve usar um array (como no exemplo abaixo) ou preferencialmente usar o método 'value' da classe View.</p>
+<p>Veja esses exemplos:</p>
+<pre><code>     $var['titulo'] = 'Título da página';<br>
+$var['nome'] = 'Paulo Rocha';<br>
+<br>
+_view::set('home', $var);</code></pre></blockquote>
+
+<p>Usando o método 'value':</p>
+```
+     _view::val('titulo', 'Titulo da página'); //"val" é um alias para "value"
+_view::value('nome', 'Paulo Rocha');
+
+_view::set('home');```
+<p>O método "value" também aceita um array no primeiro argumento e funcionará da mesma forma como o exemplo para o método "set":</p>
+```
+     $var['titulo'] = 'Título da página';
+$var['nome'] = 'Paulo Rocha';
+
+_view::val($var);
+
+_view::set('home');```
+
+<h4>NeosTags</h4>
+<p>Como na versão anterior, você pode usar tanto o PHP dentro de views como fazer uso de uma linguagem de template própria chamada de <em><strong>neosTags</strong></em><strong></strong>.</p>
+<p>NeosTags são muito mais poderosas do que simplesmente para mostrar o conteúdo de variáveis em views. Você pode inserir automáticamente alguns componentes do HTML, como selects, lists, (etc) assim como módulos, pluguins e outras views. Além das funções já implementadas no core do NEOS você pode criar suas próprias neosTags para seus projetos e também compartilhar com outros programadores/projetos.</p>
+
+
+```
+sintaxe básica: '<neos:variável />'```
+
+
+<p>Onde "variável" deve ser substituída pelo nome da variável que se deseja mostrar neste local. Por exemplo, usando o exemplo mostrado anteriormente, para exibir o "nome" seria:</p>
+```
+
+...
+
+'<div>Meu nome é <neos:nome/>.
+
+Unknown end tag for &lt;/div&gt;
+
+'
+
+...```
+<p>Isso produzirá:</p>
+```
+
+...
+
+'<div>Meu nome é Paulo Rocha.
+
+Unknown end tag for &lt;/div&gt;
+
+'
+
+...```
+<blockquote>Veja mais sobre as <strong>neosTags.</strong> Serão um forte aliado devido a sua portabilidade e produtividade, além de fornecer uma interface mais amigável entre o designer e programador com sua sintáxe mais próxima do html do que usar o PHP, diretamente.</blockquote>
